@@ -7,14 +7,14 @@
 	<url>discodnc.cs.uni-kl.de</url>
 
 	<artifactId>DiscoDNC_tests</artifactId>
-	
+
 	<parent>
 		<groupId>de.uni_kl.cs.discodnc</groupId>
 		<artifactId>DiscoDNC_meta</artifactId>
 		<version>2.5.0</version>
 		<relativePath>../DiscoDNC_meta</relativePath>
 	</parent>
-	
+
 	<licenses>
 		<license>
 			<name>GNU General Lesser Public License (LGPL) version 2.1</name>
@@ -42,7 +42,7 @@
 		<developerConnection>scm:git:ssh://github.com/NetCal/DiscoDNC_tests.git</developerConnection>
 		<url>https://github.com/NetCal/DiscoDNC_tests/tree/master</url>
 	</scm>
-		
+
 	<build>
 		<plugins>
 			<plugin>
@@ -71,19 +71,19 @@
 	</build>
 
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>de.uni_kl.cs.discodnc</groupId>
 			<artifactId>DiscoDNC</artifactId>
 			<version>2.5.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>de.uni_kl.cs.discodnc</groupId>
 			<artifactId>DiscoDNCext_MPARTC</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -99,5 +99,23 @@
 		</dependency>
 
 	</dependencies>
-	
+
+	<profiles>
+		<profile>
+			<id>eclipse</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.junit.jupiter</groupId>
+					<artifactId>junit-jupiter-engine</artifactId>
+					<version>[5.0.0,5.0.3],[5.1.0]</version>
+				</dependency>
+				<dependency>
+					<groupId>org.junit.platform</groupId>
+					<artifactId>junit-platform-launcher</artifactId>
+					<version>1.2.0-M1</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>
