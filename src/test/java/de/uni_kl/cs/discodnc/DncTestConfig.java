@@ -28,16 +28,16 @@
 
 package de.uni_kl.cs.discodnc;
 
+import de.uni_kl.cs.discodnc.nc.AnalysisConfig;
 import de.uni_kl.cs.discodnc.CurveBackend;
 import de.uni_kl.cs.discodnc.Calculator.NumImpl;
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig;
 
 import java.util.Set;
 
 public class DncTestConfig extends AnalysisConfig {
 	// Functional test specific parameters
 	protected boolean define_multiplexing_globally;
-	protected AnalysisConfig.Multiplexing mux_discipline;
+	protected AnalysisConfig.Multiplexing multiplexing;
 	protected boolean console_output = false;
 
 	// Calculator configuration
@@ -50,7 +50,7 @@ public class DncTestConfig extends AnalysisConfig {
 	}
 
 	public DncTestConfig(Set<ArrivalBoundMethod> arrival_bound_methods, boolean convolve_alternative_arrival_bounds,
-			boolean tbrl_convolution, boolean tbrl_deconvolution, AnalysisConfig.Multiplexing mux_discipline,
+			boolean tbrl_convolution, boolean tbrl_deconvolution, AnalysisConfig.Multiplexing multiplexing,
 			boolean define_multiplexing_globally, NumImpl numbers, CurveBackend curves ) {
 
 		super(AnalysisConfig.MuxDiscipline.GLOBAL_ARBITRARY, // Not used, no influence yet.
@@ -58,7 +58,7 @@ public class DncTestConfig extends AnalysisConfig {
 				GammaFlag.GLOBALLY_OFF, // Not used, no influence yet.
 				arrival_bound_methods, convolve_alternative_arrival_bounds, tbrl_convolution, tbrl_deconvolution, false);
 
-		this.mux_discipline = mux_discipline;
+		this.multiplexing = multiplexing;
 		this.define_multiplexing_globally = define_multiplexing_globally;
 
 		// Will not work. Num implementation and curve implementation need to be stored
@@ -77,7 +77,7 @@ public class DncTestConfig extends AnalysisConfig {
 		return num_implementation;
 	}
 
-	protected CurveBackend getCurveBackend() {
+	protected CurveBackend getCurveImpl() {
 		return curve_implementation;
 	}
 
@@ -89,8 +89,8 @@ public class DncTestConfig extends AnalysisConfig {
 
 		func_test_str.append(arrivalBoundMethods().toString());
 
-		if (convolveAlternativeArrivalBounds()) {
-			func_test_str.append(", " + "conv alt ABs");
+		if (removeDuplicateArrivalBounds()) {
+			func_test_str.append(", " + "rm dupl ABs");
 		}
 		if (tbrlConvolution()) {
 			func_test_str.append(", " + "TbRl Conv");
@@ -99,7 +99,7 @@ public class DncTestConfig extends AnalysisConfig {
 			func_test_str.append(", " + "TbRl Deconv");
 		}
 
-		func_test_str.append(", " + mux_discipline.toString());
+		func_test_str.append(", " + multiplexing.toString());
 
 		if (define_multiplexing_globally) {
 			func_test_str.append(", " + "MUX global");
