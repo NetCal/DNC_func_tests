@@ -58,12 +58,12 @@
 					<dependency>
 						<groupId>org.junit.platform</groupId>
 						<artifactId>junit-platform-surefire-provider</artifactId>
-						<version>1.2.0-M1</version>
+						<version>[1.2.0]</version>
 					</dependency>
 					<dependency>
 						<groupId>org.junit.jupiter</groupId>
 						<artifactId>junit-jupiter-engine</artifactId>
-						<version>5.1.0</version>
+						<version>[5.1.0]</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -75,13 +75,13 @@
 		<dependency>
 			<groupId>de.uni_kl.cs.discodnc</groupId>
 			<artifactId>DiscoDNC</artifactId>
-			<version>2.5.0</version>
+			<version>[2.5.0]</version>
 		</dependency>
 
 		<dependency>
 			<groupId>de.uni_kl.cs.discodnc</groupId>
 			<artifactId>DiscoDNCext_MPARTC</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>[1.0.0-SNAPSHOT]</version>
 		</dependency>
 
 		<dependency>
@@ -112,7 +112,7 @@
 				<dependency>
 					<groupId>org.junit.platform</groupId>
 					<artifactId>junit-platform-launcher</artifactId>
-					<version>1.2.0-M1</version>
+					<version>[1.2.0]</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>
