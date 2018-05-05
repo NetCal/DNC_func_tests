@@ -97,7 +97,15 @@
 			<scope>test</scope>
 			<version>[5.2.0]</version>
 		</dependency>
-
+        
+        <dependency>
+            <groupId>ch.ethz.rtc.kernel</groupId>
+            <artifactId>rtc</artifactId>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/rtc.jar</systemPath>
+            <version>1.2</version>
+        </dependency>
+        
 	</dependencies>
 
 	<profiles>
