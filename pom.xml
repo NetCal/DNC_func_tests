@@ -48,7 +48,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.21.0</version>
+				<version>[2.21.0,]</version>
 				<configuration>
 					<includes>
 						<include>**/*Test*</include>
@@ -63,7 +63,7 @@
 					<dependency>
 						<groupId>org.junit.jupiter</groupId>
 						<artifactId>junit-jupiter-engine</artifactId>
-						<version>[5.1.0]</version>
+						<version>[5.2.0]</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -97,27 +97,31 @@
 			<scope>test</scope>
 			<version>[5.2.0]</version>
 		</dependency>
-        
-        <dependency>
-            <groupId>ch.ethz.rtc.kernel</groupId>
-            <artifactId>rtc</artifactId>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/rtc.jar</systemPath>
-            <version>1.2</version>
-        </dependency>
-                
+
+		<dependency>
+			<groupId>ch.ethz.rtc.kernel</groupId>
+			<artifactId>rtc</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/rtc.jar</systemPath>
+			<version>1.2.beta.100</version>
+		</dependency>
+
 	</dependencies>
 
 	<profiles>
 		<profile>
+			<!-- Eclipse users need to activate this profile manually.
+				Go to your project's properties, Maven and add 
+				eclipse (all lower case) to your Active Maven Profiles. -->
 			<id>eclipse</id>
 			<dependencies>
 				<dependency>
 					<groupId>org.junit.jupiter</groupId>
 					<artifactId>junit-jupiter-engine</artifactId>
-					<version>[5.1.0]</version>
+					<version>[5.2.0]</version>
 					<scope>test</scope>
 				</dependency>
+
 				<dependency>
 					<groupId>org.junit.platform</groupId>
 					<artifactId>junit-platform-launcher</artifactId>
