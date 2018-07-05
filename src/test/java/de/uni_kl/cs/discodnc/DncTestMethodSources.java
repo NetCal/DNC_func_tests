@@ -125,38 +125,23 @@ public class DncTestMethodSources {
 		nums.add(NumImpl.RATIONAL_INTEGER);
 		nums.add(NumImpl.RATIONAL_BIGINTEGER);
 
+		// TODO All tests use token buckets and rate latencies.
+		// Therefore, we can mix affine and pw-affine minplus implementations. 
 		Set<CurveBackend> curves = new HashSet<CurveBackend>();
-		curves.add(CurveBackend_DNC.DNC);
+		curves.add(CurveBackend_DNC_PWAFFINE.DNC_PWAFFINE);
 		curves.add(CurveBackend_DNC_AFFINE.DNC_AFFINE);
 		curves.add(CurveBackend_MPARTC.MPARTC);
-		
-//		Set<OperationImpl> operations = new HashSet<OperationImpl>();
-//		operations.add(OperationImpl.DNC);
-//		operations.add(OperationImpl.NATIVE);
 
-		// Parameter configurations for single arrival bounding tests
-		// 		AB, convolve alternative ABs, tbrl opt convolution, tbrl opt deconvolution, mux,
-		// global mux def, number class to use, curve class to use, operations class to use.
+		// Parameter configurations for single arrival bounding tests:
+		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
 		for (CurveBackend curve : curves) {
 			for (NumImpl num : nums) {
 				for (Set<ArrivalBoundMethod> ab : ab_sets) {
 					for (Multiplexing mux : mux_disciplines) {
-						test_configurations.add(new DncTestConfig(ab, false, false, false, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, false, false, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, true, false, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, true, false, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, false, true, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, false, true, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, true, true, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, true, true, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, false, false, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, false, false, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, true, false, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, true, false, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, false, true, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, false, true, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, true, true, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, true, true, mux, true, num, curve));
+						test_configurations.add(new DncTestConfig(ab, false, mux, false, num, curve));
+						test_configurations.add(new DncTestConfig(ab, true, mux, false, num, curve));
+						test_configurations.add(new DncTestConfig(ab, false, mux, true, num, curve));
+						test_configurations.add(new DncTestConfig(ab, true, mux, true, num, curve));
 					}
 				}
 			}

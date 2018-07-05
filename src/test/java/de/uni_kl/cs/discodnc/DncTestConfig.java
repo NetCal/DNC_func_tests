@@ -43,20 +43,20 @@ public class DncTestConfig extends AnalysisConfig {
 	// Calculator configuration
 	protected boolean enable_checks = false;
 	protected NumImpl num_implementation;
-	protected CurveBackend curve_implementation;
+	protected CurveBackend curve_backend;
 
 	@SuppressWarnings("unused")
 	private DncTestConfig() {
 	}
 
 	public DncTestConfig(Set<ArrivalBoundMethod> arrival_bound_methods, boolean convolve_alternative_arrival_bounds,
-			boolean tbrl_convolution, boolean tbrl_deconvolution, AnalysisConfig.Multiplexing multiplexing,
+			AnalysisConfig.Multiplexing multiplexing,
 			boolean define_multiplexing_globally, NumImpl numbers, CurveBackend curves ) {
 
 		super(AnalysisConfig.MuxDiscipline.GLOBAL_ARBITRARY, // Not used, no influence yet.
 				GammaFlag.GLOBALLY_OFF, // Not used, no influence yet.
 				GammaFlag.GLOBALLY_OFF, // Not used, no influence yet.
-				arrival_bound_methods, convolve_alternative_arrival_bounds, tbrl_convolution, tbrl_deconvolution, false);
+				arrival_bound_methods, convolve_alternative_arrival_bounds, false);
 
 		this.multiplexing = multiplexing;
 		this.define_multiplexing_globally = define_multiplexing_globally;
@@ -66,7 +66,7 @@ public class DncTestConfig extends AnalysisConfig {
 		// CalculatorConfig.
 
 		num_implementation = numbers;
-		curve_implementation = curves;
+		curve_backend = curves;
 	}
 
 	public boolean fullConsoleOutput() { // false == Exceptions only
@@ -78,12 +78,12 @@ public class DncTestConfig extends AnalysisConfig {
 	}
 
 	protected CurveBackend getCurveImpl() {
-		return curve_implementation;
+		return curve_backend;
 	}
 
 	@Override
 	public String toString() {
-		// AB, convolve alternative ABs, tbrl opt convolution, tbrl opt deconvolusion, mux,
+		// AB, convolve alternative ABs, mux,
 		// global mux def, numbers, curves
 		StringBuffer func_test_str = new StringBuffer();
 
@@ -91,12 +91,6 @@ public class DncTestConfig extends AnalysisConfig {
 
 		if (removeDuplicateArrivalBounds()) {
 			func_test_str.append(", " + "rm dupl ABs");
-		}
-		if (tbrlConvolution()) {
-			func_test_str.append(", " + "TbRl Conv");
-		}
-		if (tbrlDeconvolution()) {
-			func_test_str.append(", " + "TbRl Deconv");
 		}
 
 		func_test_str.append(", " + multiplexing.toString());
@@ -107,7 +101,8 @@ public class DncTestConfig extends AnalysisConfig {
 
 		func_test_str.append(", NUM_" + num_implementation.toString());
 
-		func_test_str.append(", C_" + curve_implementation.toString());
+		// Also prints the min-plus implementation used by this config.
+		func_test_str.append(", C_" + curve_backend.toString());
 
 		return func_test_str.toString();
 	}
