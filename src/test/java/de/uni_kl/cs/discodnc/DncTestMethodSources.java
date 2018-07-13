@@ -128,8 +128,8 @@ public class DncTestMethodSources {
 		// TODO All tests use token buckets and rate latencies.
 		// Therefore, we can mix affine and pw-affine minplus implementations. 
 		Set<CurveBackend> curves = new HashSet<CurveBackend>();
-		curves.add(CurveBackend_DNC_PWAFFINE.DNC_PWAFFINE);
-		curves.add(CurveBackend_DNC_AFFINE.DNC_AFFINE);
+		curves.add(CurveBackend_DNC_PwAffine.DNC_PWAFFINE);
+		curves.add(CurveBackend_DNC_Affine.DNC_AFFINE);
 		curves.add(CurveBackend_MPARTC.MPARTC);
 
 		// Parameter configurations for single arrival bounding tests:
