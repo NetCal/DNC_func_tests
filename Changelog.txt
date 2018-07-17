@@ -1,3 +1,0 @@
-v2.5.0
-----------------------------
-* Projetc setup: refactoring to multimodule project, moving tests to separate module

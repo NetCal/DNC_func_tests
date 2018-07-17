@@ -28,18 +28,17 @@
 
 package de.uni_kl.cs.discodnc;
 
+import de.uni_kl.cs.discodnc.Calculator.NumImpl;
 import de.uni_kl.cs.discodnc.nc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.nc.AnalysisConfig.Multiplexing;
-import de.uni_kl.cs.discodnc.CurveBackend;
-import de.uni_kl.cs.discodnc.Calculator.NumImpl;
-//import CalculatorConfig.OperationImpl;
-
 import org.junit.jupiter.params.provider.Arguments;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
+
+//import CalculatorConfig.OperationImpl;
 
 public class DncTestMethodSources {
 
@@ -130,7 +129,7 @@ public class DncTestMethodSources {
 		Set<CurveBackend> curves = new HashSet<CurveBackend>();
 		curves.add(CurveBackend_DNC_PwAffine.DNC_PWAFFINE);
 		curves.add(CurveBackend_DNC_Affine.DNC_AFFINE);
-		curves.add(CurveBackend_MPARTC.MPARTC);
+		curves.add(de.uni_kl.cs.discodnc.CurveBackend_MPARTC.MPARTC);
 
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
