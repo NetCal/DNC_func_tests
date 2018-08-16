@@ -28,9 +28,10 @@
 
 package de.uni_kl.cs.discodnc;
 
-import de.uni_kl.cs.discodnc.Calculator.NumImpl;
 import de.uni_kl.cs.discodnc.nc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.nc.AnalysisConfig.Multiplexing;
+import de.uni_kl.cs.discodnc.numbers.NumBackend;
+
 import org.junit.jupiter.params.provider.Arguments;
 
 import java.util.Collections;
@@ -118,11 +119,11 @@ public class DncTestMethodSources {
 	private static Set<DncTestConfig> createParameters(Set<Multiplexing> mux_disciplines, Set<Set<ArrivalBoundMethod>> ab_sets) {
 		Set<DncTestConfig> test_configurations = new HashSet<DncTestConfig>();
 
-		Set<NumImpl> nums = new HashSet<NumImpl>();
-		nums.add(NumImpl.REAL_DOUBLE_PRECISION);
-		nums.add(NumImpl.REAL_SINGLE_PRECISION);
-		nums.add(NumImpl.RATIONAL_INTEGER);
-		nums.add(NumImpl.RATIONAL_BIGINTEGER);
+		Set<NumBackend> nums = new HashSet<NumBackend>();
+		nums.add(NumBackend.REAL_DOUBLE_PRECISION);
+		nums.add(NumBackend.REAL_SINGLE_PRECISION);
+		nums.add(NumBackend.RATIONAL_INTEGER);
+		nums.add(NumBackend.RATIONAL_BIGINTEGER);
 
 		// TODO All tests use token buckets and rate latencies.
 		// Therefore, we can mix affine and pw-affine minplus implementations. 
@@ -134,7 +135,7 @@ public class DncTestMethodSources {
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
 		for (CurveBackend curve : curves) {
-			for (NumImpl num : nums) {
+			for (NumBackend num : nums) {
 				for (Set<ArrivalBoundMethod> ab : ab_sets) {
 					for (Multiplexing mux : mux_disciplines) {
 						test_configurations.add(new DncTestConfig(ab, false, mux, false, num, curve));
