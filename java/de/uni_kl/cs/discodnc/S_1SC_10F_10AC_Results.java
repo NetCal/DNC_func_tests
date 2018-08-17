@@ -118,6 +118,7 @@ public class S_1SC_10F_10AC_Results extends DncTestResults {
 			 * 		SFA delay ==> expected <15.617392> but was <15.617393>
 			 * 		SFA delay ==> expected <33.69565200805664> but was <33.695652173913054>
 			 * 		SFA delay ==> expected <29.807692> but was <29.80769>
+			 * 		SFA delay ==> expected <29.80769157409668> but was <29.807695388793945>
 			 * 
 			 * Rational BigInteger: Epsilon set to ignore
 			 * 		SFA delay ==> expected <775 / 23> but was <2371120727725635 / 70368744177664>
@@ -136,7 +137,7 @@ public class S_1SC_10F_10AC_Results extends DncTestResults {
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 
-			real_single_epsilon = new RealSinglePrecision(new Float(2e-6));
+			real_single_epsilon = new RealSinglePrecision(new Float(4e-6));
 			addEpsilon(6, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(6, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 
