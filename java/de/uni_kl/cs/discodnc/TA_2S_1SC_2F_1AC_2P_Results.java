@@ -86,11 +86,11 @@ public class TA_2S_1SC_2F_1AC_2P_Results extends DncTestResults {
 			 * Rational BigInteger: Epsilon set to ignore
 			 * 		SFA delay ==> expected <50> but was <7036874417766399 / 140737488355328>
 			 */
-			real_double_epsilon = new RealDoublePrecision(new Double(6e-14));
+			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("6e-14"));
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 
-			real_single_epsilon = new RealSinglePrecision(new Float(3.25e-5));
+			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("3.25e-5"));
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 

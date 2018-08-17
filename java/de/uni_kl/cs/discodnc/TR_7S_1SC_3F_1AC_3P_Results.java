@@ -96,19 +96,19 @@ public class TR_7S_1SC_3F_1AC_3P_Results extends DncTestResults {
 			 * 		SFA delay ==> expected <1735 / 6> but was <2543536898921813 / 8796093022208>
 			 * 		SFA delay ==> expected <1655 / 6> but was <4852511317251413 / 17592186044416>
 			 */
-			real_double_epsilon = new RealDoublePrecision(new Double(3e-13));
+			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("3e-13"));
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			
-			real_double_epsilon = new RealDoublePrecision(new Double(2.5e-13));
+			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("2.5e-13"));
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 
-			real_single_epsilon = new RealSinglePrecision(new Float(1.3e-4)); // Set to prevent backlog bound test failure.
+			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("1.3e-4")); // Set to prevent backlog bound test failure.
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 
-			real_single_epsilon = new RealSinglePrecision(new Float(1.25e-4));
+			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("1.25e-4"));
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 

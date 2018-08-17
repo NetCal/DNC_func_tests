@@ -83,11 +83,11 @@ public class FF_4S_1SC_3F_1AC_3P_Results extends DncTestResults {
 			 * 		TFA delay ==> expected <2395 / 18> but was <11703690437882311 / 87960930222080>
 			 * 		TFA delay ==> expected <685 / 6> but was <10042206200354133 / 87960930222080>
 			 */
-			real_double_epsilon = new RealDoublePrecision(new Double(6e-14));
+			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("6e-14"));
 			addEpsilon(2, Analyses.TFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(2, Analyses.TFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 
-			real_single_epsilon = new RealSinglePrecision(new Float(3.25e-5));
+			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("3.25e-5"));
 			addEpsilon(2, Analyses.TFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(2, Analyses.TFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 
@@ -129,15 +129,15 @@ public class FF_4S_1SC_3F_1AC_3P_Results extends DncTestResults {
 			 * 		SFA delay ==> expected <2095 / 27> but was <5460093298229855 / 70368744177664>
 			 * 		SFA delay ==> expected <1025 / 3> but was <3005331782587733 / 8796093022208>
 			 */
-			real_double_epsilon = new RealDoublePrecision(new Double(7e-14));
+			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("7e-14"));
 			addEpsilon(2, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(2, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 
-			real_single_epsilon = new RealSinglePrecision(new Float(1e-5));
+			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("1e-5"));
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			
-			real_single_epsilon = new RealSinglePrecision(new Float(4e-5));
+			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("4e-5"));
 			addEpsilon(2, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(2, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 
@@ -174,11 +174,11 @@ public class FF_4S_1SC_3F_1AC_3P_Results extends DncTestResults {
 			 * 		PMOO delay ==> expected <2095 / 27> but was <5460093298229855 / 70368744177664>
 			 * 		PMOO delay ==> expected <1025 / 3> but was <6010663565175467 / 17592186044416>
 			 */
-			real_double_epsilon = new RealDoublePrecision(new Double(7e-14));
+			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("7e-14"));
 			addEpsilon(0, Analyses.PMOO, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(2, Analyses.PMOO, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 
-			real_single_epsilon = new RealSinglePrecision(new Float(4e-5));
+			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("4e-5"));
 			addEpsilon(2, Analyses.PMOO, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 
 			addEpsilon(0, Analyses.PMOO, ab_set, Multiplexing.ARBITRARY, NumBackend.RATIONAL_BIGINTEGER, rational_bigint_epsilon);
