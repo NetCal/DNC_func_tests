@@ -28,6 +28,14 @@
 
 package de.uni_kl.cs.discodnc;
 
+import de.uni_kl.cs.discodnc.curves.Curve;
+import de.uni_kl.cs.discodnc.curves.LinearSegment;
+import de.uni_kl.cs.discodnc.curves.dnc.LinearSegment_DNC;
+import de.uni_kl.cs.discodnc.curves.dnc.affine.Curve_DNC_Affine;
+import de.uni_kl.cs.discodnc.curves.dnc.pwaffine.Curve_DNC_PwAffine;
+import de.uni_kl.cs.discodnc.minplus.MinPlus;
+import de.uni_kl.cs.discodnc.minplus.dnc.affine.MinPlus_DNC_Affine;
+import de.uni_kl.cs.discodnc.minplus.dnc.pwaffine.MinPlus_DNC_PwAffine;
 import de.uni_kl.cs.discodnc.nc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.nc.AnalysisConfig.Multiplexing;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
@@ -125,12 +133,12 @@ public class DncTestMethodSources {
 		nums.add(NumBackend.RATIONAL_INTEGER);
 		nums.add(NumBackend.RATIONAL_BIGINTEGER);
 
-		// TODO All tests use token buckets and rate latencies.
-		// Therefore, we can mix affine and pw-affine minplus implementations. 
 		Set<CurveBackend> curves = new HashSet<CurveBackend>();
 		curves.add(CurveBackend_DNC_PwAffine.DNC_PWAFFINE);
 		curves.add(CurveBackend_DNC_Affine.DNC_AFFINE);
 		curves.add(de.uni_kl.cs.discodnc.CurveBackend_MPARTC.MPARTC);
+		curves.add(CurveBackend_DNC_AffineC_PwAffineMP.DNC_AFFINEC_PWAFFINEMP);
+		curves.add(CurveBackend_DNC_PwAffineC_AffineMP.DNC_PWAFFINEC_AFFINEMP);
 
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
@@ -149,4 +157,76 @@ public class DncTestMethodSources {
 
 		return test_configurations;
 	}
+}
+
+enum CurveBackend_DNC_AffineC_PwAffineMP implements CurveBackend {
+	DNC_AFFINEC_PWAFFINEMP;
+
+	@Override
+	public MinPlus getMinPlus() {
+		return MinPlus_DNC_PwAffine.MINPLUS_DNC;
+	}
+
+	@Override
+	public Curve getCurveFactory() {
+		return Curve_DNC_Affine.getFactory();
+	}
+
+	@Override
+	public LinearSegment.Builder getLinearSegmentFactory() {
+		return LinearSegment_DNC.getBuilder();
+	}
+
+    @Override
+    public String toString() {
+    	 StringBuffer curve_backend_str = new StringBuffer();
+
+         curve_backend_str.append("Curve");
+         curve_backend_str.append(":");
+         curve_backend_str.append(this.name());
+         
+         curve_backend_str.append(", ");
+
+         curve_backend_str.append("Operations");
+         curve_backend_str.append(":");
+         curve_backend_str.append(MinPlus_DNC_PwAffine.MINPLUS_DNC.name());
+
+         return curve_backend_str.toString();
+    }
+}
+
+enum CurveBackend_DNC_PwAffineC_AffineMP implements CurveBackend {
+	DNC_PWAFFINEC_AFFINEMP;
+
+	@Override
+	public MinPlus getMinPlus() {
+		return MinPlus_DNC_Affine.MINPLUS_DNC_AFFINE;
+	}
+
+	@Override
+	public Curve getCurveFactory() {
+		return Curve_DNC_PwAffine.getFactory();
+	}
+
+	@Override
+	public LinearSegment.Builder getLinearSegmentFactory() {
+		return LinearSegment_DNC.getBuilder();
+	}
+
+    @Override
+    public String toString() {
+    	 StringBuffer curve_backend_str = new StringBuffer();
+
+         curve_backend_str.append("Curve");
+         curve_backend_str.append(":");
+         curve_backend_str.append(this.name());
+         
+         curve_backend_str.append(", ");
+
+         curve_backend_str.append("Operations");
+         curve_backend_str.append(":");
+         curve_backend_str.append(MinPlus_DNC_PwAffine.MINPLUS_DNC.name());
+
+         return curve_backend_str.toString();
+    }
 }
