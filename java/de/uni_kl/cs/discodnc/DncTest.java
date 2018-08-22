@@ -28,7 +28,7 @@
 
 package de.uni_kl.cs.discodnc;
 
-import de.uni_kl.cs.discodnc.bounds.disco.Bound;
+import de.uni_kl.cs.discodnc.bounds.disco.pwaffine.Bound;
 import de.uni_kl.cs.discodnc.feedforward.Analysis;
 import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig;
 import de.uni_kl.cs.discodnc.feedforward.AnalysisResults;
