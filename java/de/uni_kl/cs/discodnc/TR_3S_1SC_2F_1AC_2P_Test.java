@@ -39,7 +39,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class TR_3S_1SC_2F_1AC_2P_Test extends DncTest {
 	private static TR_3S_1SC_2F_1AC_2P_ServerGraph network_factory = new TR_3S_1SC_2F_1AC_2P_ServerGraph();
-	private static ServerGraph network = network_factory.getNetwork();
+	private static ServerGraph network = network_factory.getServerGraph();
 	private Flow f0, f1;
 
 	private TR_3S_1SC_2F_1AC_2P_Test() throws Exception {

@@ -51,37 +51,37 @@ public class S_1SC_2F_2AC_ServerGraph implements ServerGraphFactory {
 	private ArrivalCurve arrival_curve_0 = Curve.getFactory().createTokenBucket(ac_r_0, ac_b_0);
 	private ArrivalCurve arrival_curve_1 = Curve.getFactory().createTokenBucket(ac_r_1, ac_b_1);
 
-	private ServerGraph network;
+	private ServerGraph server_graph;
 
 	public S_1SC_2F_2AC_ServerGraph() {
-		network = createNetwork();
+		server_graph = createServerGraph();
 	}
 
-	public ServerGraph getNetwork() {
-		return network;
+	public ServerGraph getServerGraph() {
+		return server_graph;
 	}
 
-	public ServerGraph createNetwork() {
-		network = new ServerGraph();
+	public ServerGraph createServerGraph() {
+		server_graph = new ServerGraph();
 
-		s0 = network.addServer(service_curve);
+		s0 = server_graph.addServer(service_curve);
 		s0.setUseGamma(false);
 		s0.setUseExtraGamma(false);
 
 		try {
-			f0 = network.addFlow("f0", arrival_curve_0, s0);
-			f1 = network.addFlow("f1", arrival_curve_1, s0);
+			f0 = server_graph.addFlow("f0", arrival_curve_0, s0);
+			f1 = server_graph.addFlow("f1", arrival_curve_1, s0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 
-		return network;
+		return server_graph;
 	}
 
 	public void reinitializeCurves() {
 		service_curve = Curve.getFactory().createRateLatency(sc_R, sc_T);
-		for (Server server : network.getServers()) {
+		for (Server server : server_graph.getServers()) {
 			server.setServiceCurve(service_curve);
 		}
 

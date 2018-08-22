@@ -46,39 +46,39 @@ public class S_1SC_10F_10AC_ServerGraph implements ServerGraphFactory {
 	private ServiceCurve service_curve = Curve.getFactory().createRateLatency(sc_R, sc_T);
 	private ArrivalCurve[] arrival_curves = new ArrivalCurve[10];
 	
-	private ServerGraph network;
+	private ServerGraph server_graph;
 
 	public S_1SC_10F_10AC_ServerGraph() {
-		network = createNetwork();
+		server_graph = createServerGraph();
 	}
 
-	public ServerGraph getNetwork() {
-		return network;
+	public ServerGraph getServerGraph() {
+		return server_graph;
 	}
 
-	public ServerGraph createNetwork() {
-		network = new ServerGraph();
+	public ServerGraph createServerGraph() {
+		server_graph = new ServerGraph();
 
-		s0 = network.addServer(service_curve);
+		s0 = server_graph.addServer(service_curve);
 		s0.setUseGamma(false);
 		s0.setUseExtraGamma(false);
 
 		try {
 			for (int i = 1; i <= 10; i++) {
 				arrival_curves[i - 1] = Curve.getFactory().createTokenBucket(i * 0.1, i);
-				flows[i - 1] = network.addFlow( "f" + Integer.toString(i-1) , arrival_curves[i - 1], s0);
+				flows[i - 1] = server_graph.addFlow( "f" + Integer.toString(i-1) , arrival_curves[i - 1], s0);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 
-		return network;
+		return server_graph;
 	}
 
 	public void reinitializeCurves() {
 		service_curve = Curve.getFactory().createRateLatency(sc_R, sc_T);
-		for (Server server : network.getServers()) {
+		for (Server server : server_graph.getServers()) {
 			server.setServiceCurve(service_curve);
 		}
 
