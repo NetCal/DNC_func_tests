@@ -31,41 +31,50 @@ package de.uni_kl.cs.discodnc;
 import de.uni_kl.cs.discodnc.curves.ArrivalCurve;
 import de.uni_kl.cs.discodnc.curves.Curve;
 import de.uni_kl.cs.discodnc.curves.ServiceCurve;
-import de.uni_kl.cs.discodnc.network.Flow;
-import de.uni_kl.cs.discodnc.network.Network;
-import de.uni_kl.cs.discodnc.network.NetworkFactory;
-import de.uni_kl.cs.discodnc.network.Server;
+import de.uni_kl.cs.discodnc.server_graph.Flow;
+import de.uni_kl.cs.discodnc.server_graph.ServerGraph;
+import de.uni_kl.cs.discodnc.server_graph.ServerGraphFactory;
+import de.uni_kl.cs.discodnc.server_graph.Server;
 
-public class S_1SC_1F_1AC_Network implements NetworkFactory {
-	private final int sc_R = 10;
-	private final int sc_T = 10;
+public class TR_3S_1SC_2F_1AC_2P_ServerGraph implements ServerGraphFactory {
+	private final int sc_R = 20;
+	private final int sc_T = 20;
 	private final int ac_r = 5;
 	private final int ac_b = 25;
 	
-	private Server s0;
+	private Server s0, s1, s2;
 	
 	private ServiceCurve service_curve = Curve.getFactory().createRateLatency(sc_R, sc_T);
 	private ArrivalCurve arrival_curve = Curve.getFactory().createTokenBucket(ac_r, ac_b);
 	
-	private Network network;
+	private ServerGraph network;
 
-	public S_1SC_1F_1AC_Network() {
+	public TR_3S_1SC_2F_1AC_2P_ServerGraph() {
 		network = createNetwork();
 	}
 
-	public Network getNetwork() {
+	public ServerGraph getNetwork() {
 		return network;
 	}
 
-	public Network createNetwork() {
-		network = new Network();
+	public ServerGraph createNetwork() {
+		network = new ServerGraph();
 
 		s0 = network.addServer(service_curve);
-		s0.setUseGamma(false);
-		s0.setUseExtraGamma(false);
+		s1 = network.addServer(service_curve);
+		s2 = network.addServer(service_curve);
 
 		try {
-			network.addFlow("f0", arrival_curve, s0);
+			network.addLink(s0, s2);
+			network.addLink(s1, s2);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+		try {
+			network.addFlow("f0", arrival_curve, s0, s2);
+			network.addFlow("f1", arrival_curve, s1, s2);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

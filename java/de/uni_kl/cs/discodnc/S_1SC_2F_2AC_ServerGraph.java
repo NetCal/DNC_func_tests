@@ -31,12 +31,12 @@ package de.uni_kl.cs.discodnc;
 import de.uni_kl.cs.discodnc.curves.ArrivalCurve;
 import de.uni_kl.cs.discodnc.curves.Curve;
 import de.uni_kl.cs.discodnc.curves.ServiceCurve;
-import de.uni_kl.cs.discodnc.network.Flow;
-import de.uni_kl.cs.discodnc.network.Network;
-import de.uni_kl.cs.discodnc.network.NetworkFactory;
-import de.uni_kl.cs.discodnc.network.Server;
+import de.uni_kl.cs.discodnc.server_graph.Flow;
+import de.uni_kl.cs.discodnc.server_graph.ServerGraph;
+import de.uni_kl.cs.discodnc.server_graph.ServerGraphFactory;
+import de.uni_kl.cs.discodnc.server_graph.Server;
 
-public class S_1SC_2F_2AC_Network implements NetworkFactory {
+public class S_1SC_2F_2AC_ServerGraph implements ServerGraphFactory {
 	private final int sc_R = 10;
 	private final int sc_T = 10;
 	private final int ac_r_0 = 4;
@@ -51,18 +51,18 @@ public class S_1SC_2F_2AC_Network implements NetworkFactory {
 	private ArrivalCurve arrival_curve_0 = Curve.getFactory().createTokenBucket(ac_r_0, ac_b_0);
 	private ArrivalCurve arrival_curve_1 = Curve.getFactory().createTokenBucket(ac_r_1, ac_b_1);
 
-	private Network network;
+	private ServerGraph network;
 
-	public S_1SC_2F_2AC_Network() {
+	public S_1SC_2F_2AC_ServerGraph() {
 		network = createNetwork();
 	}
 
-	public Network getNetwork() {
+	public ServerGraph getNetwork() {
 		return network;
 	}
 
-	public Network createNetwork() {
-		network = new Network();
+	public ServerGraph createNetwork() {
+		network = new ServerGraph();
 
 		s0 = network.addServer(service_curve);
 		s0.setUseGamma(false);

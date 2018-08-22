@@ -39,11 +39,11 @@ import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.MuxDiscipline;
 import de.uni_kl.cs.discodnc.feedforward.analyses.PmooAnalysis;
 import de.uni_kl.cs.discodnc.feedforward.analyses.SeparateFlowAnalysis;
 import de.uni_kl.cs.discodnc.feedforward.analyses.TotalFlowAnalysis;
-import de.uni_kl.cs.discodnc.network.Flow;
-import de.uni_kl.cs.discodnc.network.Network;
-import de.uni_kl.cs.discodnc.network.NetworkFactory;
-import de.uni_kl.cs.discodnc.network.Server;
 import de.uni_kl.cs.discodnc.numbers.Num;
+import de.uni_kl.cs.discodnc.server_graph.Flow;
+import de.uni_kl.cs.discodnc.server_graph.ServerGraph;
+import de.uni_kl.cs.discodnc.server_graph.ServerGraphFactory;
+import de.uni_kl.cs.discodnc.server_graph.Server;
 
 import java.util.Set;
 
@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public abstract class DncTest {
-	protected NetworkFactory network_factory;
+	protected ServerGraphFactory sg_factory;
 	protected DncTestConfig test_config;
 	protected DncTestResults expected_results;
 
@@ -60,8 +60,8 @@ public abstract class DncTest {
 	private DncTest() {
 	}
 
-	protected DncTest(NetworkFactory network_factory, DncTestResults expected_results) {
-		this.network_factory = network_factory;
+	protected DncTest(ServerGraphFactory sg_factory, DncTestResults expected_results) {
+		this.sg_factory = sg_factory;
 		this.expected_results = expected_results;
 	}
 
@@ -78,8 +78,8 @@ public abstract class DncTest {
 		Calculator.getInstance().setCurveBackend(test_config.getCurveBackend());
 		Calculator.getInstance().setNumBackend(test_config.getNumBackend());
 
-		// reinitialize the network and the expected bounds
-		network_factory.reinitializeCurves();
+		// reinitialize the server graph and the expected bounds
+		sg_factory.reinitializeCurves();
 		expected_results.initialize();
 	}
 
@@ -150,7 +150,7 @@ public abstract class DncTest {
 			System.out.println();
 		}
 
-		// The alias holds the original flow ID, independent of the order flows are added to the network under analysis.
+		// The alias holds the original flow ID, independent of the order flows are added to the server graph under analysis.
 		Integer foiID_from_alias = Integer.valueOf(flow_of_interest.getAlias().substring(1));
 		
 		AnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.TFA, test_config.arrivalBoundMethods(), test_config.multiplexing);
@@ -201,7 +201,7 @@ public abstract class DncTest {
 			System.out.println();
 		}
 
-		// The alias holds the original flow ID, independent of the order flows are added to the network under analysis.
+		// The alias holds the original flow ID, independent of the order flows are added to the server graph under analysis.
 		Integer foiID_from_alias = Integer.valueOf(flow_of_interest.getAlias().substring(1));
 		
 		AnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.SFA, test_config.arrivalBoundMethods(), test_config.multiplexing);
@@ -256,7 +256,7 @@ public abstract class DncTest {
 			System.out.println();
 		}
 
-		// The alias holds the original flow ID, independent of the order flows are added to the network under analysis.
+		// The alias holds the original flow ID, independent of the order flows are added to the server graph under analysis.
 		Integer foiID_from_alias = Integer.valueOf(flow_of_interest.getAlias().substring(1));
 		
 		AnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.PMOO, test_config.arrivalBoundMethods(), test_config.multiplexing);
@@ -288,7 +288,7 @@ public abstract class DncTest {
 		}
 	}
 
-	protected void runSinkTreePMOOtest(Network sink_tree, Flow flow_of_interest) {
+	protected void runSinkTreePMOOtest(ServerGraph sink_tree, Flow flow_of_interest) {
 		Num num_factory = Num.getFactory(Calculator.getInstance().getNumBackend());
 		
 		Num backlog_bound_TBRL = null;
@@ -327,7 +327,7 @@ public abstract class DncTest {
 			System.out.println();
 		}
 
-		// The alias holds the original flow ID, independent of the order flows are added to the network under analysis.
+		// The alias holds the original flow ID, independent of the order flows are added to the server graph under analysis.
 		Integer foiID_from_alias = Integer.valueOf(flow_of_interest.getAlias().substring(1));
 
 		AnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.PMOO, DncTestMethodSources.sinktree, Multiplexing.ARBITRARY);
