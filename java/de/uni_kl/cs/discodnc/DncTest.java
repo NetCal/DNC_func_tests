@@ -29,16 +29,16 @@
 package de.uni_kl.cs.discodnc;
 
 import de.uni_kl.cs.discodnc.bounds.Bound;
-import de.uni_kl.cs.discodnc.nc.Analysis;
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig;
-import de.uni_kl.cs.discodnc.nc.Analysis.Analyses;
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig.ArrivalBoundMethod;
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig.Multiplexing;
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig.MuxDiscipline;
-import de.uni_kl.cs.discodnc.nc.AnalysisResults;
-import de.uni_kl.cs.discodnc.nc.analyses.PmooAnalysis;
-import de.uni_kl.cs.discodnc.nc.analyses.SeparateFlowAnalysis;
-import de.uni_kl.cs.discodnc.nc.analyses.TotalFlowAnalysis;
+import de.uni_kl.cs.discodnc.feedforward.Analysis;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisResults;
+import de.uni_kl.cs.discodnc.feedforward.Analysis.Analyses;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.ArrivalBoundMethod;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.Multiplexing;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.MuxDiscipline;
+import de.uni_kl.cs.discodnc.feedforward.analyses.PmooAnalysis;
+import de.uni_kl.cs.discodnc.feedforward.analyses.SeparateFlowAnalysis;
+import de.uni_kl.cs.discodnc.feedforward.analyses.TotalFlowAnalysis;
 import de.uni_kl.cs.discodnc.network.Flow;
 import de.uni_kl.cs.discodnc.network.Network;
 import de.uni_kl.cs.discodnc.network.NetworkFactory;

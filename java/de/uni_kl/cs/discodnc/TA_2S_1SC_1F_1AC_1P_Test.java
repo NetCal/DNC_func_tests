@@ -28,9 +28,9 @@
 
 package de.uni_kl.cs.discodnc;
 
-import de.uni_kl.cs.discodnc.nc.analyses.PmooAnalysis;
-import de.uni_kl.cs.discodnc.nc.analyses.SeparateFlowAnalysis;
-import de.uni_kl.cs.discodnc.nc.analyses.TotalFlowAnalysis;
+import de.uni_kl.cs.discodnc.feedforward.analyses.PmooAnalysis;
+import de.uni_kl.cs.discodnc.feedforward.analyses.SeparateFlowAnalysis;
+import de.uni_kl.cs.discodnc.feedforward.analyses.TotalFlowAnalysis;
 import de.uni_kl.cs.discodnc.network.Flow;
 import de.uni_kl.cs.discodnc.network.Network;
 
