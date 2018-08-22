@@ -31,10 +31,10 @@ package de.uni_kl.cs.discodnc;
 import de.uni_kl.cs.discodnc.curves.ArrivalCurve;
 import de.uni_kl.cs.discodnc.curves.Curve;
 import de.uni_kl.cs.discodnc.curves.ServiceCurve;
-import de.uni_kl.cs.discodnc.server_graph.Flow;
-import de.uni_kl.cs.discodnc.server_graph.ServerGraph;
-import de.uni_kl.cs.discodnc.server_graph.ServerGraphFactory;
-import de.uni_kl.cs.discodnc.server_graph.Server;
+import de.uni_kl.cs.discodnc.network.server_graph.Flow;
+import de.uni_kl.cs.discodnc.network.server_graph.Server;
+import de.uni_kl.cs.discodnc.network.server_graph.ServerGraph;
+import de.uni_kl.cs.discodnc.network.server_graph.ServerGraphFactory;
 
 public class TR_7S_1SC_3F_1AC_3P_ServerGraph implements ServerGraphFactory {
 	private final int sc_R = 20;
