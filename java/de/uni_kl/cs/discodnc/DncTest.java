@@ -298,13 +298,13 @@ public abstract class DncTest {
 
 		try {
 			backlog_bound_TBRL = num_factory.create(Bound.backlogPmooSinkTreeTbRl(sink_tree,
-					flow_of_interest.getSink(), ArrivalBoundMethod.PMOO_SINKTREE_TBRL));
+					flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE));
 			backlog_bound_TBRL_CONV = num_factory.create(Bound.backlogPmooSinkTreeTbRl(sink_tree,
-					flow_of_interest.getSink(), ArrivalBoundMethod.PMOO_SINKTREE_TBRL_CONV));
+					flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE_CONV));
 			backlog_bound_TBRL_CONV_TBRL_DECONV = num_factory.create(Bound.backlogPmooSinkTreeTbRl(sink_tree,
-					flow_of_interest.getSink(), ArrivalBoundMethod.PMOO_SINKTREE_TBRL_CONV_TBRL_DECONV));
+					flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE_CONV_DECONV));
 			backlog_bound_TBRL_HOMO = num_factory.create(Bound.backlogPmooSinkTreeTbRl(sink_tree,
-					flow_of_interest.getSink(), ArrivalBoundMethod.PMOO_SINKTREE_TBRL_HOMO));
+					flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE_HOMO));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Analysis failed");

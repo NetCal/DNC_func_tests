@@ -28,14 +28,14 @@
 
 package de.uni_kl.cs.discodnc;
 
+import de.uni_kl.cs.discodnc.algebra.MinPlus;
+import de.uni_kl.cs.discodnc.algebra.disco.affine.MinPlus_DNC_Affine;
+import de.uni_kl.cs.discodnc.algebra.disco.pwaffine.MinPlus_DNC_PwAffine;
 import de.uni_kl.cs.discodnc.curves.Curve;
 import de.uni_kl.cs.discodnc.curves.LinearSegment;
-import de.uni_kl.cs.discodnc.curves.dnc.LinearSegment_DNC;
-import de.uni_kl.cs.discodnc.curves.dnc.affine.Curve_DNC_Affine;
-import de.uni_kl.cs.discodnc.curves.dnc.pwaffine.Curve_DNC_PwAffine;
-import de.uni_kl.cs.discodnc.minplus.MinPlus;
-import de.uni_kl.cs.discodnc.minplus.dnc.affine.MinPlus_DNC_Affine;
-import de.uni_kl.cs.discodnc.minplus.dnc.pwaffine.MinPlus_DNC_PwAffine;
+import de.uni_kl.cs.discodnc.curves.disco.LinearSegment_DNC;
+import de.uni_kl.cs.discodnc.curves.disco.affine.Curve_DNC_Affine;
+import de.uni_kl.cs.discodnc.curves.disco.pwaffine.Curve_DNC_PwAffine;
 import de.uni_kl.cs.discodnc.nc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.nc.AnalysisConfig.Multiplexing;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
@@ -56,30 +56,30 @@ public class DncTestMethodSources {
 
 	private static Set<Set<ArrivalBoundMethod>> instantiateABsets() {
 		single_1 = new HashSet<ArrivalBoundMethod>();
-		single_1.add(ArrivalBoundMethod.PBOO_CONCATENATION);
+		single_1.add(ArrivalBoundMethod.AGGR_PBOO_CONCATENATION);
 
 		single_2 = new HashSet<ArrivalBoundMethod>();
-		single_2.add(ArrivalBoundMethod.PBOO_PER_HOP);
+		single_2.add(ArrivalBoundMethod.AGGR_PBOO_PER_SERVER);
 
 		single_3 = new HashSet<ArrivalBoundMethod>();
-		single_3.add(ArrivalBoundMethod.PMOO);
+		single_3.add(ArrivalBoundMethod.AGGR_PMOO);
 
 		pair_1 = new HashSet<ArrivalBoundMethod>();
-		pair_1.add(ArrivalBoundMethod.PBOO_PER_HOP);
-		pair_1.add(ArrivalBoundMethod.PBOO_CONCATENATION);
+		pair_1.add(ArrivalBoundMethod.AGGR_PBOO_PER_SERVER);
+		pair_1.add(ArrivalBoundMethod.AGGR_PBOO_CONCATENATION);
 
 		pair_2 = new HashSet<ArrivalBoundMethod>();
-		pair_2.add(ArrivalBoundMethod.PBOO_PER_HOP);
-		pair_2.add(ArrivalBoundMethod.PMOO);
+		pair_2.add(ArrivalBoundMethod.AGGR_PBOO_PER_SERVER);
+		pair_2.add(ArrivalBoundMethod.AGGR_PMOO);
 
 		pair_3 = new HashSet<ArrivalBoundMethod>();
-		pair_3.add(ArrivalBoundMethod.PBOO_CONCATENATION);
-		pair_3.add(ArrivalBoundMethod.PMOO);
+		pair_3.add(ArrivalBoundMethod.AGGR_PBOO_CONCATENATION);
+		pair_3.add(ArrivalBoundMethod.AGGR_PMOO);
 
 		triplet = new HashSet<ArrivalBoundMethod>();
-		triplet.add(ArrivalBoundMethod.PBOO_PER_HOP);
-		triplet.add(ArrivalBoundMethod.PBOO_CONCATENATION);
-		triplet.add(ArrivalBoundMethod.PMOO);
+		triplet.add(ArrivalBoundMethod.AGGR_PBOO_PER_SERVER);
+		triplet.add(ArrivalBoundMethod.AGGR_PBOO_CONCATENATION);
+		triplet.add(ArrivalBoundMethod.AGGR_PMOO);
 		
 		Set<Set<ArrivalBoundMethod>> ab_sets = new HashSet<Set<ArrivalBoundMethod>>();
 		ab_sets.add(single_1);
@@ -92,10 +92,10 @@ public class DncTestMethodSources {
 
 		// sink tree bounds are not added to ab_sets as the tests treat them differently. 
 		sinktree = new HashSet<ArrivalBoundMethod>();
-		sinktree.add(ArrivalBoundMethod.PMOO_SINKTREE_TBRL);
-		sinktree.add(ArrivalBoundMethod.PMOO_SINKTREE_TBRL_CONV);
-		sinktree.add(ArrivalBoundMethod.PMOO_SINKTREE_TBRL_CONV_TBRL_DECONV);
-		sinktree.add(ArrivalBoundMethod.PMOO_SINKTREE_TBRL_HOMO);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_CONV);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_CONV_DECONV);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_HOMO);
 		
 		return ab_sets;
 	}
@@ -133,16 +133,16 @@ public class DncTestMethodSources {
 		nums.add(NumBackend.RATIONAL_INTEGER);
 		nums.add(NumBackend.RATIONAL_BIGINTEGER);
 
-		Set<CurveBackend> curves = new HashSet<CurveBackend>();
-		curves.add(CurveBackend_DNC_PwAffine.DNC_PWAFFINE);
-		curves.add(CurveBackend_DNC_Affine.DNC_AFFINE);
+		Set<AlgDncBackend> curves = new HashSet<AlgDncBackend>();
+		curves.add(AlgDncBackend_DNC_PwAffine.DNC_PWAFFINE);
+		curves.add(AlgDncBackend_DNC_Affine.DNC_AFFINE);
 		curves.add(de.uni_kl.cs.discodnc.CurveBackend_MPARTC.MPARTC);
-		curves.add(CurveBackend_DNC_AffineC_PwAffineMP.DNC_AFFINEC_PWAFFINEMP);
-		curves.add(CurveBackend_DNC_PwAffineC_AffineMP.DNC_PWAFFINEC_AFFINEMP);
+		curves.add(AlgDncBackend_DNC_AffineC_PwAffineMP.DNC_AFFINEC_PWAFFINEMP);
+		curves.add(AlgDncBackend_DNC_PwAffineC_AffineMP.DNC_PWAFFINEC_AFFINEMP);
 
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
-		for (CurveBackend curve : curves) {
+		for (AlgDncBackend curve : curves) {
 			for (NumBackend num : nums) {
 				for (Set<ArrivalBoundMethod> ab : ab_sets) {
 					for (Multiplexing mux : mux_disciplines) {
@@ -159,12 +159,12 @@ public class DncTestMethodSources {
 	}
 }
 
-enum CurveBackend_DNC_AffineC_PwAffineMP implements CurveBackend {
+enum AlgDncBackend_DNC_AffineC_PwAffineMP implements AlgDncBackend {
 	DNC_AFFINEC_PWAFFINEMP;
 
 	@Override
 	public MinPlus getMinPlus() {
-		return MinPlus_DNC_PwAffine.MINPLUS_DNC;
+		return MinPlus_DNC_PwAffine.MINPLUS_DNC_PWAFFINE;
 	}
 
 	@Override
@@ -179,23 +179,11 @@ enum CurveBackend_DNC_AffineC_PwAffineMP implements CurveBackend {
 
     @Override
     public String toString() {
-    	 StringBuffer curve_backend_str = new StringBuffer();
-
-         curve_backend_str.append("Curve");
-         curve_backend_str.append(":");
-         curve_backend_str.append(this.name());
-         
-         curve_backend_str.append(", ");
-
-         curve_backend_str.append("Operations");
-         curve_backend_str.append(":");
-         curve_backend_str.append(MinPlus_DNC_PwAffine.MINPLUS_DNC.name());
-
-         return curve_backend_str.toString();
+         return assembleString(this.name(), MinPlus_DNC_PwAffine.MINPLUS_DNC_PWAFFINE.name());
     }
 }
 
-enum CurveBackend_DNC_PwAffineC_AffineMP implements CurveBackend {
+enum AlgDncBackend_DNC_PwAffineC_AffineMP implements AlgDncBackend {
 	DNC_PWAFFINEC_AFFINEMP;
 
 	@Override
@@ -215,18 +203,6 @@ enum CurveBackend_DNC_PwAffineC_AffineMP implements CurveBackend {
 
     @Override
     public String toString() {
-    	 StringBuffer curve_backend_str = new StringBuffer();
-
-         curve_backend_str.append("Curve");
-         curve_backend_str.append(":");
-         curve_backend_str.append(this.name());
-         
-         curve_backend_str.append(", ");
-
-         curve_backend_str.append("Operations");
-         curve_backend_str.append(":");
-         curve_backend_str.append(MinPlus_DNC_PwAffine.MINPLUS_DNC.name());
-
-         return curve_backend_str.toString();
+    	return assembleString(this.name(), MinPlus_DNC_PwAffine.MINPLUS_DNC_PWAFFINE.name());
     }
 }
