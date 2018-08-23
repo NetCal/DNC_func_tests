@@ -134,9 +134,13 @@ public class DncTestMethodSources {
 		Set<AlgDncBackend> curves = new HashSet<AlgDncBackend>();
 		curves.add(AlgDncBackend_DNC_PwAffine.DISCO_PWAFFINE);
 		curves.add(AlgDncBackend_DNC_Affine.DISCO_AFFINE);
-		curves.add(de.uni_kl.cs.discodnc.AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
+
 		curves.add(AlgDncBackend_DNC_AffineC_PwAffineMP.DISCO_AFFINEC_PWAFFINEMP);
 		curves.add(AlgDncBackend_DNC_PwAffineC_AffineMP.DISCO_PWAFFINEC_AFFINEMP);
+		
+		curves.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
+		curves.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
+		curves.add(AlgDncBackend_MPARTC_DISCO_PwAffine.MPARTC_PWAFFINEC_DISCO_PWAFFINEMP);
 
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
