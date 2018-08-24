@@ -28,8 +28,16 @@
 
 package de.uni_kl.cs.discodnc;
 
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig.ArrivalBoundMethod;
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig.Multiplexing;
+import de.uni_kl.cs.discodnc.algebra.MinPlus;
+import de.uni_kl.cs.discodnc.algebra.disco.affine.MinPlus_Disco_Affine;
+import de.uni_kl.cs.discodnc.algebra.disco.pwaffine.MinPlus_Disco_PwAffine;
+import de.uni_kl.cs.discodnc.curves.Curve;
+import de.uni_kl.cs.discodnc.curves.LinearSegment;
+import de.uni_kl.cs.discodnc.curves.disco.LinearSegment_Disco;
+import de.uni_kl.cs.discodnc.curves.disco.affine.Curve_Disco_Affine;
+import de.uni_kl.cs.discodnc.curves.disco.pwaffine.Curve_Disco_PwAffine;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.ArrivalBoundMethod;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.Multiplexing;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
 
 import org.junit.jupiter.params.provider.Arguments;
@@ -39,8 +47,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-//import CalculatorConfig.OperationImpl;
-
 public class DncTestMethodSources {
 
 	protected static Set<Set<ArrivalBoundMethod>> ab_sets = instantiateABsets();
@@ -48,30 +54,30 @@ public class DncTestMethodSources {
 
 	private static Set<Set<ArrivalBoundMethod>> instantiateABsets() {
 		single_1 = new HashSet<ArrivalBoundMethod>();
-		single_1.add(ArrivalBoundMethod.PBOO_CONCATENATION);
+		single_1.add(ArrivalBoundMethod.AGGR_PBOO_CONCATENATION);
 
 		single_2 = new HashSet<ArrivalBoundMethod>();
-		single_2.add(ArrivalBoundMethod.PBOO_PER_HOP);
+		single_2.add(ArrivalBoundMethod.AGGR_PBOO_PER_SERVER);
 
 		single_3 = new HashSet<ArrivalBoundMethod>();
-		single_3.add(ArrivalBoundMethod.PMOO);
+		single_3.add(ArrivalBoundMethod.AGGR_PMOO);
 
 		pair_1 = new HashSet<ArrivalBoundMethod>();
-		pair_1.add(ArrivalBoundMethod.PBOO_PER_HOP);
-		pair_1.add(ArrivalBoundMethod.PBOO_CONCATENATION);
+		pair_1.add(ArrivalBoundMethod.AGGR_PBOO_PER_SERVER);
+		pair_1.add(ArrivalBoundMethod.AGGR_PBOO_CONCATENATION);
 
 		pair_2 = new HashSet<ArrivalBoundMethod>();
-		pair_2.add(ArrivalBoundMethod.PBOO_PER_HOP);
-		pair_2.add(ArrivalBoundMethod.PMOO);
+		pair_2.add(ArrivalBoundMethod.AGGR_PBOO_PER_SERVER);
+		pair_2.add(ArrivalBoundMethod.AGGR_PMOO);
 
 		pair_3 = new HashSet<ArrivalBoundMethod>();
-		pair_3.add(ArrivalBoundMethod.PBOO_CONCATENATION);
-		pair_3.add(ArrivalBoundMethod.PMOO);
+		pair_3.add(ArrivalBoundMethod.AGGR_PBOO_CONCATENATION);
+		pair_3.add(ArrivalBoundMethod.AGGR_PMOO);
 
 		triplet = new HashSet<ArrivalBoundMethod>();
-		triplet.add(ArrivalBoundMethod.PBOO_PER_HOP);
-		triplet.add(ArrivalBoundMethod.PBOO_CONCATENATION);
-		triplet.add(ArrivalBoundMethod.PMOO);
+		triplet.add(ArrivalBoundMethod.AGGR_PBOO_PER_SERVER);
+		triplet.add(ArrivalBoundMethod.AGGR_PBOO_CONCATENATION);
+		triplet.add(ArrivalBoundMethod.AGGR_PMOO);
 		
 		Set<Set<ArrivalBoundMethod>> ab_sets = new HashSet<Set<ArrivalBoundMethod>>();
 		ab_sets.add(single_1);
@@ -84,10 +90,10 @@ public class DncTestMethodSources {
 
 		// sink tree bounds are not added to ab_sets as the tests treat them differently. 
 		sinktree = new HashSet<ArrivalBoundMethod>();
-		sinktree.add(ArrivalBoundMethod.PMOO_SINKTREE_TBRL);
-		sinktree.add(ArrivalBoundMethod.PMOO_SINKTREE_TBRL_CONV);
-		sinktree.add(ArrivalBoundMethod.PMOO_SINKTREE_TBRL_CONV_TBRL_DECONV);
-		sinktree.add(ArrivalBoundMethod.PMOO_SINKTREE_TBRL_HOMO);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_CONV);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_CONV_DECONV);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_HOMO);
 		
 		return ab_sets;
 	}
@@ -125,16 +131,20 @@ public class DncTestMethodSources {
 		nums.add(NumBackend.RATIONAL_INTEGER);
 		nums.add(NumBackend.RATIONAL_BIGINTEGER);
 
-		// TODO All tests use token buckets and rate latencies.
-		// Therefore, we can mix affine and pw-affine minplus implementations. 
-		Set<CurveBackend> curves = new HashSet<CurveBackend>();
-		curves.add(CurveBackend_DNC_PwAffine.DNC_PWAFFINE);
-		curves.add(CurveBackend_DNC_Affine.DNC_AFFINE);
-		curves.add(de.uni_kl.cs.discodnc.CurveBackend_MPARTC.MPARTC);
+		Set<AlgDncBackend> curves = new HashSet<AlgDncBackend>();
+		curves.add(AlgDncBackend_DNC_PwAffine.DISCO_PWAFFINE);
+		curves.add(AlgDncBackend_DNC_Affine.DISCO_AFFINE);
+
+		curves.add(AlgDncBackend_DNC_AffineC_PwAffineMP.DISCO_AFFINEC_PWAFFINEMP);
+		curves.add(AlgDncBackend_DNC_PwAffineC_AffineMP.DISCO_PWAFFINEC_AFFINEMP);
+		
+		curves.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
+		curves.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
+		curves.add(AlgDncBackend_MPARTC_DISCO_PwAffine.MPARTC_PWAFFINEC_DISCO_PWAFFINEMP);
 
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
-		for (CurveBackend curve : curves) {
+		for (AlgDncBackend curve : curves) {
 			for (NumBackend num : nums) {
 				for (Set<ArrivalBoundMethod> ab : ab_sets) {
 					for (Multiplexing mux : mux_disciplines) {
@@ -149,4 +159,52 @@ public class DncTestMethodSources {
 
 		return test_configurations;
 	}
+}
+
+enum AlgDncBackend_DNC_AffineC_PwAffineMP implements AlgDncBackend {
+	DISCO_AFFINEC_PWAFFINEMP;
+
+	@Override
+	public MinPlus getMinPlus() {
+		return MinPlus_Disco_PwAffine.MINPLUS_DISCO_PWAFFINE;
+	}
+
+	@Override
+	public Curve getCurveFactory() {
+		return Curve_Disco_Affine.getFactory();
+	}
+
+	@Override
+	public LinearSegment.Builder getLinearSegmentFactory() {
+		return LinearSegment_Disco.getBuilder();
+	}
+
+    @Override
+    public String toString() {
+         return assembleString(this.name(), MinPlus_Disco_PwAffine.MINPLUS_DISCO_PWAFFINE.name());
+    }
+}
+
+enum AlgDncBackend_DNC_PwAffineC_AffineMP implements AlgDncBackend {
+	DISCO_PWAFFINEC_AFFINEMP;
+
+	@Override
+	public MinPlus getMinPlus() {
+		return MinPlus_Disco_Affine.MINPLUS_DISCO_AFFINE;
+	}
+
+	@Override
+	public Curve getCurveFactory() {
+		return Curve_Disco_PwAffine.getFactory();
+	}
+
+	@Override
+	public LinearSegment.Builder getLinearSegmentFactory() {
+		return LinearSegment_Disco.getBuilder();
+	}
+
+    @Override
+    public String toString() {
+    	return assembleString(this.name(), MinPlus_Disco_PwAffine.MINPLUS_DISCO_PWAFFINE.name());
+    }
 }

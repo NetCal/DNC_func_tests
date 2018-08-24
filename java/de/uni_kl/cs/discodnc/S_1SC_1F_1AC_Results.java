@@ -30,9 +30,9 @@ package de.uni_kl.cs.discodnc;
 
 import java.util.Set;
 
-import de.uni_kl.cs.discodnc.nc.Analysis.Analyses;
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig.ArrivalBoundMethod;
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig.Multiplexing;
+import de.uni_kl.cs.discodnc.feedforward.Analysis.Analyses;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.ArrivalBoundMethod;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.Multiplexing;
 import de.uni_kl.cs.discodnc.numbers.Num;
 
 public class S_1SC_1F_1AC_Results extends DncTestResults {

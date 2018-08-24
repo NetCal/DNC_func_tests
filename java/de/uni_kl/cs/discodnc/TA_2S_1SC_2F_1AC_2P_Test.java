@@ -28,18 +28,18 @@
 
 package de.uni_kl.cs.discodnc;
 
-import de.uni_kl.cs.discodnc.nc.analyses.PmooAnalysis;
-import de.uni_kl.cs.discodnc.nc.analyses.SeparateFlowAnalysis;
-import de.uni_kl.cs.discodnc.nc.analyses.TotalFlowAnalysis;
-import de.uni_kl.cs.discodnc.network.Flow;
-import de.uni_kl.cs.discodnc.network.Network;
+import de.uni_kl.cs.discodnc.feedforward.analyses.PmooAnalysis;
+import de.uni_kl.cs.discodnc.feedforward.analyses.SeparateFlowAnalysis;
+import de.uni_kl.cs.discodnc.feedforward.analyses.TotalFlowAnalysis;
+import de.uni_kl.cs.discodnc.network.server_graph.Flow;
+import de.uni_kl.cs.discodnc.network.server_graph.ServerGraph;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class TA_2S_1SC_2F_1AC_2P_Test extends DncTest {
-	private static TA_2S_1SC_2F_1AC_2P_Network network_factory = new TA_2S_1SC_2F_1AC_2P_Network();
-	private static Network network = network_factory.getNetwork();
+	private static TA_2S_1SC_2F_1AC_2P_ServerGraph network_factory = new TA_2S_1SC_2F_1AC_2P_ServerGraph();
+	private static ServerGraph network = network_factory.getServerGraph();
 	private Flow f0, f1;
 
 	private TA_2S_1SC_2F_1AC_2P_Test() throws Exception {

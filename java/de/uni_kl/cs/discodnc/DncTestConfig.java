@@ -28,8 +28,8 @@
 
 package de.uni_kl.cs.discodnc;
 
-import de.uni_kl.cs.discodnc.CurveBackend;
-import de.uni_kl.cs.discodnc.nc.AnalysisConfig;
+import de.uni_kl.cs.discodnc.AlgDncBackend;
+import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
 
 import java.util.Set;
@@ -43,7 +43,7 @@ public class DncTestConfig extends AnalysisConfig {
 	// Calculator configuration
 	protected boolean enable_checks = false;
 	protected NumBackend num_backend;
-	protected CurveBackend curve_backend;
+	protected AlgDncBackend curve_backend;
 
 	@SuppressWarnings("unused")
 	private DncTestConfig() {
@@ -51,7 +51,7 @@ public class DncTestConfig extends AnalysisConfig {
 
 	public DncTestConfig(Set<ArrivalBoundMethod> arrival_bound_methods, boolean convolve_alternative_arrival_bounds,
 			AnalysisConfig.Multiplexing multiplexing,
-			boolean define_multiplexing_globally, NumBackend numbers, CurveBackend curves ) {
+			boolean define_multiplexing_globally, NumBackend numbers, AlgDncBackend curves ) {
 
 		super(AnalysisConfig.MuxDiscipline.GLOBAL_ARBITRARY, // Not used, no influence yet.
 				GammaFlag.GLOBALLY_OFF, // Not used, no influence yet.
@@ -77,7 +77,7 @@ public class DncTestConfig extends AnalysisConfig {
 		return num_backend;
 	}
 
-	protected CurveBackend getCurveBackend() {
+	protected AlgDncBackend getCurveBackend() {
 		return curve_backend;
 	}
 

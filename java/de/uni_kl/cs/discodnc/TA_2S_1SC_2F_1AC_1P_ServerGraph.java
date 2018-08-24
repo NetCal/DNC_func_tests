@@ -31,57 +31,69 @@ package de.uni_kl.cs.discodnc;
 import de.uni_kl.cs.discodnc.curves.ArrivalCurve;
 import de.uni_kl.cs.discodnc.curves.Curve;
 import de.uni_kl.cs.discodnc.curves.ServiceCurve;
-import de.uni_kl.cs.discodnc.network.Flow;
-import de.uni_kl.cs.discodnc.network.Network;
-import de.uni_kl.cs.discodnc.network.NetworkFactory;
-import de.uni_kl.cs.discodnc.network.Server;
+import de.uni_kl.cs.discodnc.network.server_graph.Flow;
+import de.uni_kl.cs.discodnc.network.server_graph.Server;
+import de.uni_kl.cs.discodnc.network.server_graph.ServerGraph;
+import de.uni_kl.cs.discodnc.network.server_graph.ServerGraphFactory;
 
-public class S_1SC_1F_1AC_Network implements NetworkFactory {
+public class TA_2S_1SC_2F_1AC_1P_ServerGraph implements ServerGraphFactory {
 	private final int sc_R = 10;
 	private final int sc_T = 10;
 	private final int ac_r = 5;
 	private final int ac_b = 25;
 	
-	private Server s0;
+	private Server s0, s1;
 	
 	private ServiceCurve service_curve = Curve.getFactory().createRateLatency(sc_R, sc_T);
 	private ArrivalCurve arrival_curve = Curve.getFactory().createTokenBucket(ac_r, ac_b);
 	
-	private Network network;
+	private ServerGraph server_graph;
 
-	public S_1SC_1F_1AC_Network() {
-		network = createNetwork();
+	public TA_2S_1SC_2F_1AC_1P_ServerGraph() {
+		server_graph = createServerGraph();
 	}
 
-	public Network getNetwork() {
-		return network;
+	public ServerGraph getServerGraph() {
+		return server_graph;
 	}
 
-	public Network createNetwork() {
-		network = new Network();
+	public ServerGraph createServerGraph() {
+		server_graph = new ServerGraph();
 
-		s0 = network.addServer(service_curve);
+		s0 = server_graph.addServer(service_curve);
 		s0.setUseGamma(false);
 		s0.setUseExtraGamma(false);
 
+		s1 = server_graph.addServer(service_curve);
+		s1.setUseGamma(false);
+		s1.setUseExtraGamma(false);
+
 		try {
-			network.addFlow("f0", arrival_curve, s0);
+			server_graph.addTurn(s0, s1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 
-		return network;
+		try {
+			server_graph.addFlow("f0", arrival_curve, s0, s1);
+			server_graph.addFlow("f1", arrival_curve, s0, s1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+		return server_graph;
 	}
 
 	public void reinitializeCurves() {
 		service_curve = Curve.getFactory().createRateLatency(sc_R, sc_T);
-		for (Server server : network.getServers()) {
+		for (Server server : server_graph.getServers()) {
 			server.setServiceCurve(service_curve);
 		}
 
 		arrival_curve = Curve.getFactory().createTokenBucket(ac_r, ac_b);
-		for (Flow flow : network.getFlows()) {
+		for (Flow flow : server_graph.getFlows()) {
 			flow.setArrivalCurve(arrival_curve);
 		}
 	}
