@@ -88,7 +88,6 @@ public abstract class DncTestResults {
 	}
 
 	public AnalysisResults getBounds(Integer flowId, Analyses analysis, Set<ArrivalBoundMethod> ab_set, Multiplexing mux) {
-
 		Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>> foi_maps = results_map.get(flowId);
 		if(foi_maps == null || foi_maps.isEmpty()) {
 			throw new RuntimeException("No DNC test results fournd! The results file may be corrupted.");
@@ -129,7 +128,6 @@ public abstract class DncTestResults {
 	}
 	
 	protected void addEpsilon(Integer flowId, Analyses analysis, Set<ArrivalBoundMethod> ab_set, Multiplexing mux, NumBackend num_rep, Num epsilon) {
-
 		Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Map<NumBackend, Num>>>> foi_maps = epsilon_map.get(flowId);
 		if(foi_maps == null) {
 			foi_maps = new HashMap<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Map<NumBackend, Num>>>>();
@@ -158,7 +156,6 @@ public abstract class DncTestResults {
 	}
 
 	public Num getEpsilon(Integer flowId, Analyses analysis, Set<ArrivalBoundMethod> ab_set, Multiplexing mux, NumBackend num_rep) {
-		
 		Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Map<NumBackend, Num>>>> foi_maps = epsilon_map.get(flowId);
 		if(foi_maps == null || foi_maps.isEmpty()) {
 			return Num.getFactory(Calculator.getInstance().getNumBackend()).createZero();
@@ -171,12 +168,14 @@ public abstract class DncTestResults {
 		
 		Map<Multiplexing, Map<NumBackend, Num>> foi_analysis_ab_maps = new HashMap<Multiplexing, Map<NumBackend, Num>>(); 
 		for(Map.Entry<Set<ArrivalBoundMethod>, Map<Multiplexing, Map<NumBackend, Num>>> abs_to_map : foi_analysis_maps.entrySet()) {
-			if( abs_to_map.getKey().size() == ab_set.size()
+			if(abs_to_map.getKey().size() == ab_set.size()
 					&& abs_to_map.getKey().containsAll(ab_set)) {
 				foi_analysis_ab_maps = abs_to_map.getValue();
 				break;
 			}
 		}
+		// Ignore Spotbugs' "Nullcheck" as it did not recognize the potential assignment in the loop before.
+		// Also note that the same method is used in getBounds but Spotbugs did not complain.
 		if(foi_analysis_ab_maps.isEmpty()) {
 			return Num.getFactory(Calculator.getInstance().getNumBackend()).createZero();
 		}
