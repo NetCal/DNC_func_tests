@@ -28,6 +28,8 @@
 
 package de.uni_kl.cs.discodnc;
 
+import de.uni_kl.cs.discodnc.AnalysisConfig.ArrivalBoundMethod;
+import de.uni_kl.cs.discodnc.AnalysisConfig.Multiplexing;
 import de.uni_kl.cs.discodnc.algebra.MinPlus;
 import de.uni_kl.cs.discodnc.algebra.disco.affine.MinPlus_Disco_Affine;
 import de.uni_kl.cs.discodnc.algebra.disco.pwaffine.MinPlus_Disco_PwAffine;
@@ -36,8 +38,6 @@ import de.uni_kl.cs.discodnc.curves.LinearSegment;
 import de.uni_kl.cs.discodnc.curves.disco.LinearSegment_Disco;
 import de.uni_kl.cs.discodnc.curves.disco.affine.Curve_Disco_Affine;
 import de.uni_kl.cs.discodnc.curves.disco.pwaffine.Curve_Disco_PwAffine;
-import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.ArrivalBoundMethod;
-import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig.Multiplexing;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
 
 import org.junit.jupiter.params.provider.Arguments;

@@ -29,7 +29,6 @@
 package de.uni_kl.cs.discodnc;
 
 import de.uni_kl.cs.discodnc.AlgDncBackend;
-import de.uni_kl.cs.discodnc.feedforward.AnalysisConfig;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
 
 import java.util.Set;
