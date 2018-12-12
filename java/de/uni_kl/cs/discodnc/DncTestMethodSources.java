@@ -90,9 +90,8 @@ public class DncTestMethodSources {
 
 		// sink tree bounds are not added to ab_sets as the tests treat them differently. 
 		sinktree = new HashSet<ArrivalBoundMethod>();
-		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE);
-		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_CONV);
-		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_CONV_DECONV);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_MINPLUS);
+		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_DIRECT);
 		sinktree.add(ArrivalBoundMethod.SINKTREE_AFFINE_HOMO);
 		
 		return ab_sets;
@@ -117,7 +116,7 @@ public class DncTestMethodSources {
 	
 	protected static Stream<Arguments> provideSinkTreeArguments() {
 		Set<Set<ArrivalBoundMethod>> ab_sets_sinktree = new HashSet<Set<ArrivalBoundMethod>>();
-		ab_sets_sinktree.add(sinktree); // TODO Test powerset of sinktree alternatives
+		ab_sets_sinktree.add(sinktree);
 		
 		return createParameters(Collections.singleton(Multiplexing.ARBITRARY), ab_sets_sinktree).stream().map(Arguments::of);
 	}

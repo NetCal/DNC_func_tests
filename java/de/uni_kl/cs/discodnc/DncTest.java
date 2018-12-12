@@ -31,12 +31,12 @@ package de.uni_kl.cs.discodnc;
 import de.uni_kl.cs.discodnc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.AnalysisConfig.Multiplexing;
 import de.uni_kl.cs.discodnc.AnalysisConfig.MuxDiscipline;
-import de.uni_kl.cs.discodnc.bounds.disco.pwaffine.Bound;
 import de.uni_kl.cs.discodnc.network.server_graph.Flow;
 import de.uni_kl.cs.discodnc.network.server_graph.Server;
 import de.uni_kl.cs.discodnc.network.server_graph.ServerGraph;
 import de.uni_kl.cs.discodnc.network.server_graph.ServerGraphFactory;
 import de.uni_kl.cs.discodnc.numbers.Num;
+import de.uni_kl.cs.discodnc.sinktree.Backlog_SinkTree;
 import de.uni_kl.cs.discodnc.tandem.Analysis;
 import de.uni_kl.cs.discodnc.tandem.AnalysisResults;
 import de.uni_kl.cs.discodnc.tandem.Analysis.Analyses;
@@ -290,20 +290,20 @@ public abstract class DncTest {
 	protected void runSinkTreePMOOtest(ServerGraph sink_tree, Flow flow_of_interest) {
 		Num num_factory = Num.getFactory(Calculator.getInstance().getNumBackend());
 		
-		Num backlog_bound_TBRL = null;
-		Num backlog_bound_TBRL_CONV = null;
-		Num backlog_bound_TBRL_CONV_TBRL_DECONV = null;
-		Num backlog_bound_TBRL_HOMO = null;
+		Num backlog_bound_AFFINE_CONV = null;
+		Num backlog_bound_AFFINE_DIRECT = null;
+		Num backlog_bound_AFFINE_HOMO = null;
 
 		try {
-			backlog_bound_TBRL = num_factory.create(Bound.backlogPmooSinkTreeTbRl(sink_tree,
-					flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE));
-			backlog_bound_TBRL_CONV = num_factory.create(Bound.backlogPmooSinkTreeTbRl(sink_tree,
-					flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE_CONV));
-			backlog_bound_TBRL_CONV_TBRL_DECONV = num_factory.create(Bound.backlogPmooSinkTreeTbRl(sink_tree,
-					flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE_CONV_DECONV));
-			backlog_bound_TBRL_HOMO = num_factory.create(Bound.backlogPmooSinkTreeTbRl(sink_tree,
-					flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE_HOMO));
+			backlog_bound_AFFINE_CONV = num_factory.create(
+					Backlog_SinkTree.derivePmooSinkTreeAffine(
+							sink_tree, flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE_MINPLUS));
+			backlog_bound_AFFINE_DIRECT = num_factory.create(
+					Backlog_SinkTree.derivePmooSinkTreeAffine(
+							sink_tree, flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE_DIRECT));
+			backlog_bound_AFFINE_HOMO = num_factory.create(
+					Backlog_SinkTree.derivePmooSinkTreeAffine(
+							sink_tree, flow_of_interest.getSink(), ArrivalBoundMethod.SINKTREE_AFFINE_HOMO));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Analysis failed");
@@ -318,11 +318,9 @@ public abstract class DncTest {
 
 			System.out.println("--- Result: ---");
 
-			System.out.println("backlog bound TBRL                  : " + backlog_bound_TBRL.toString());
-			System.out.println("backlog bound TBRL CONV             : " + backlog_bound_TBRL_CONV.toString());
-			System.out
-					.println("backlog bound TBRL CONV TBRL DECONV : " + backlog_bound_TBRL_CONV_TBRL_DECONV.toString());
-			System.out.println("backlog bound RBRL HOMO             : " + backlog_bound_TBRL_HOMO.toString());
+			System.out.println("backlog bound AFFINE CONV               : " + backlog_bound_AFFINE_CONV.toString());
+			System.out.println("backlog bound AFFINE DIRECT             : " + backlog_bound_AFFINE_DIRECT.toString());
+			System.out.println("backlog bound AFFINE HOMO               : " + backlog_bound_AFFINE_HOMO.toString());
 			System.out.println();
 		}
 
@@ -338,41 +336,32 @@ public abstract class DncTest {
 		if(epsilon.eqZero()) {
 			assertEquals(
 				bounds.getBacklogBound(), 
-				backlog_bound_TBRL,
-				"PMOO backlog TBRL");
+				backlog_bound_AFFINE_CONV, 
+				"PMOO backlog AFFINE MINPLUS");
 			assertEquals(
 				bounds.getBacklogBound(), 
-				backlog_bound_TBRL_CONV, 
-				"PMOO backlog TBRL CONV");
+				backlog_bound_AFFINE_DIRECT,
+				"PMOO backlog AFFINE DIRECT");
 			assertEquals(
 				bounds.getBacklogBound(), 
-				backlog_bound_TBRL_CONV_TBRL_DECONV, 
-				"PMOO backlog TBRL CONV TBRL DECONV");
-			assertEquals(
-				bounds.getBacklogBound(), 
-				backlog_bound_TBRL_HOMO, 
-				"PMOO backlog RBRL HOMO");
+				backlog_bound_AFFINE_HOMO, 
+				"PMOO backlog AFFINE HOMO");
 		} else {
 			assertEquals(
 				bounds.getBacklogBound().doubleValue(), 
-				backlog_bound_TBRL.doubleValue(),
+				backlog_bound_AFFINE_CONV.doubleValue(), 
 				epsilon.doubleValue(), 
-				"PMOO backlog TBRL");
+				"PMOO backlog AFFINE MINPLUS");
 			assertEquals(
 				bounds.getBacklogBound().doubleValue(), 
-				backlog_bound_TBRL_CONV.doubleValue(), 
+				backlog_bound_AFFINE_DIRECT.doubleValue(),
 				epsilon.doubleValue(), 
-				"PMOO backlog TBRL CONV");
+				"PMOO backlog AFFINE DIRECT");
 			assertEquals(
 				bounds.getBacklogBound().doubleValue(), 
-				backlog_bound_TBRL_CONV_TBRL_DECONV.doubleValue(), 
+				backlog_bound_AFFINE_HOMO.doubleValue(), 
 				epsilon.doubleValue(), 
-				"PMOO backlog TBRL CONV TBRL DECONV");
-			assertEquals(
-				bounds.getBacklogBound().doubleValue(), 
-				backlog_bound_TBRL_HOMO.doubleValue(), 
-				epsilon.doubleValue(), 
-				"PMOO backlog RBRL HOMO");
+				"PMOO backlog AFFINE HOMO");
 		}
 	}
 }
