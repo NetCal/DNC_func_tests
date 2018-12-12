@@ -61,8 +61,8 @@ public class S_1SC_2F_1AC_ServerGraph implements ServerGraphFactory {
 		server_graph = new ServerGraph();
 
 		s0 = server_graph.addServer(service_curve);
-		s0.setUseGamma(false);
-		s0.setUseExtraGamma(false);
+		s0.useMaxSC(false);
+		s0.useMaxScRate(false);
 
 		try {
 			server_graph.addFlow("f0", arrival_curve, s0);

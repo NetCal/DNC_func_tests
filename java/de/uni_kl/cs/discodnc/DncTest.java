@@ -30,7 +30,7 @@ package de.uni_kl.cs.discodnc;
 
 import de.uni_kl.cs.discodnc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.AnalysisConfig.Multiplexing;
-import de.uni_kl.cs.discodnc.AnalysisConfig.MuxDiscipline;
+import de.uni_kl.cs.discodnc.AnalysisConfig.MultiplexingEnforcement;
 import de.uni_kl.cs.discodnc.network.server_graph.Flow;
 import de.uni_kl.cs.discodnc.network.server_graph.Server;
 import de.uni_kl.cs.discodnc.network.server_graph.ServerGraph;
@@ -96,27 +96,27 @@ public abstract class DncTest {
 	public void setMux(Set<Server> servers) {
 		if (!test_config.define_multiplexing_globally) {
 
-			test_config.setMultiplexingDiscipline(MuxDiscipline.SERVER_LOCAL);
+			test_config.enforceMultiplexing(MultiplexingEnforcement.SERVER_LOCAL);
 			for (Server s : servers) {
-				s.setMultiplexingDiscipline(test_config.multiplexing);
+				s.setMultiplexing(test_config.multiplexing);
 			}
 
 		} else {
 			// Enforce potential test failure by defining the server-local multiplexing differently.
 			Multiplexing mux_local;
-			MuxDiscipline mux_global;
+			MultiplexingEnforcement mux_global;
 
 			if (test_config.multiplexing == Multiplexing.ARBITRARY) {
-				mux_global = MuxDiscipline.GLOBAL_ARBITRARY;
+				mux_global = MultiplexingEnforcement.GLOBAL_ARBITRARY;
 				mux_local = Multiplexing.FIFO;
 			} else {
-				mux_global = MuxDiscipline.GLOBAL_FIFO;
+				mux_global = MultiplexingEnforcement.GLOBAL_FIFO;
 				mux_local = Multiplexing.ARBITRARY;
 			}
 
-			test_config.setMultiplexingDiscipline(mux_global);
+			test_config.enforceMultiplexing(mux_global);
 			for (Server s : servers) {
-				s.setMultiplexingDiscipline(mux_local);
+				s.setMultiplexing(mux_local);
 			}
 		}
 	}

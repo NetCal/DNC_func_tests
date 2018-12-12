@@ -52,9 +52,9 @@ public class DncTestConfig extends AnalysisConfig {
 			AnalysisConfig.Multiplexing multiplexing,
 			boolean define_multiplexing_globally, NumBackend numbers, AlgDncBackend curves ) {
 
-		super(AnalysisConfig.MuxDiscipline.GLOBAL_ARBITRARY, // Not used, no influence yet.
-				GammaFlag.GLOBALLY_OFF, // Not used, no influence yet.
-				GammaFlag.GLOBALLY_OFF, // Not used, no influence yet.
+		super(AnalysisConfig.MultiplexingEnforcement.GLOBAL_ARBITRARY, // Not used, no influence yet.
+				MaxScEnforcement.GLOBALLY_OFF, // Not used, no influence yet.
+				MaxScEnforcement.GLOBALLY_OFF, // Not used, no influence yet.
 				arrival_bound_methods, convolve_alternative_arrival_bounds, false);
 
 		this.multiplexing = multiplexing;

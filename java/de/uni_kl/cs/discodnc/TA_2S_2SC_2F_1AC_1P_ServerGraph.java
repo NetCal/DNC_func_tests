@@ -64,12 +64,12 @@ public class TA_2S_2SC_2F_1AC_1P_ServerGraph implements ServerGraphFactory {
 		server_graph = new ServerGraph();
 
 		s0 = server_graph.addServer(service_curve_0);
-		s0.setUseGamma(false);
-		s0.setUseExtraGamma(false);
+		s0.useMaxSC(false);
+		s0.useMaxScRate(false);
 
 		s1 = server_graph.addServer(service_curve_1);
-		s1.setUseGamma(false);
-		s1.setUseExtraGamma(false);
+		s1.useMaxSC(false);
+		s1.useMaxScRate(false);
 
 		try {
 			server_graph.addTurn(s0, s1);
