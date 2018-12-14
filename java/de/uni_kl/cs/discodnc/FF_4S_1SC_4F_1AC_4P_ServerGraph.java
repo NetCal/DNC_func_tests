@@ -47,7 +47,7 @@ public class FF_4S_1SC_4F_1AC_4P_ServerGraph implements ServerGraphFactory {
 	private final int ac_b = 25;
 	
 	private Server s0, s1, s2, s3;
-	private Turn l_s0_s1, l_s1_s3, l_s2_s0, l_s0_s3;
+	private Turn t_s0_s1, t_s1_s3, t_s2_s0, t_s0_s3;
 	
 	private ServiceCurve service_curve = Curve.getFactory().createRateLatency(sc_R, sc_T);
 	private ArrivalCurve arrival_curve = Curve.getFactory().createTokenBucket(ac_r, ac_b);
@@ -71,10 +71,10 @@ public class FF_4S_1SC_4F_1AC_4P_ServerGraph implements ServerGraphFactory {
 		s3 = server_graph.addServer(service_curve);
 
 		try {
-			l_s0_s1 = server_graph.addTurn(s0, s1);
-			l_s0_s3 = server_graph.addTurn(s0, s3);
-			l_s1_s3 = server_graph.addTurn(s1, s3);
-			l_s2_s0 = server_graph.addTurn(s2, s0);
+			t_s0_s1 = server_graph.addTurn(s0, s1);
+			t_s0_s3 = server_graph.addTurn(s0, s3);
+			t_s1_s3 = server_graph.addTurn(s1, s3);
+			t_s2_s0 = server_graph.addTurn(s2, s0);
 			server_graph.addTurn(s2, s1);
 			server_graph.addTurn(s2, s3);
 		} catch (Exception e) {
@@ -83,12 +83,12 @@ public class FF_4S_1SC_4F_1AC_4P_ServerGraph implements ServerGraphFactory {
 		}
 
 		List<Turn> f0_path = new LinkedList<Turn>();
-		f0_path.add(l_s0_s1);
-		f0_path.add(l_s1_s3);
+		f0_path.add(t_s0_s1);
+		f0_path.add(t_s1_s3);
 
 		List<Turn> f3_path = new LinkedList<Turn>();
-		f3_path.add(l_s2_s0);
-		f3_path.add(l_s0_s3);
+		f3_path.add(t_s2_s0);
+		f3_path.add(t_s0_s3);
 
 		try {
 			server_graph.addFlow("f0", arrival_curve, f0_path);
