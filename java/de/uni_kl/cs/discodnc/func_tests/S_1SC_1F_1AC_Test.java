@@ -49,7 +49,7 @@ public class S_1SC_1F_1AC_Test extends DncTest {
 
 	// --------------------Flow 0--------------------
 	@ParameterizedTest(name = "[{arguments}]")
-	@MethodSource("de.uni_kl.cs.discodnc.DncTestMethodSources#provideAllArguments")
+	@MethodSource("de.uni_kl.cs.discodnc.func_tests.DncTestMethodSources#provideAllArguments")
 	public void f0_tfa(DncTestConfig test_config) {
 		initializeTest(test_config);
 		setMux(network.getServers());
@@ -57,7 +57,7 @@ public class S_1SC_1F_1AC_Test extends DncTest {
 	}
 
 	@ParameterizedTest(name = "[{arguments}]")
-	@MethodSource("de.uni_kl.cs.discodnc.DncTestMethodSources#provideAllArguments")
+	@MethodSource("de.uni_kl.cs.discodnc.func_tests.DncTestMethodSources#provideAllArguments")
 	public void f0_sfa(DncTestConfig test_config) {
 		initializeTest(test_config);
 		setMux(network.getServers());
@@ -65,7 +65,7 @@ public class S_1SC_1F_1AC_Test extends DncTest {
 	}
 
 	@ParameterizedTest(name = "[{arguments}]")
-	@MethodSource("de.uni_kl.cs.discodnc.DncTestMethodSources#provideArbArguments")
+	@MethodSource("de.uni_kl.cs.discodnc.func_tests.DncTestMethodSources#provideArbArguments")
 	public void f0_pmoo_arbMux(DncTestConfig test_config) {
 		initializeTest(test_config);
 		setMux(network.getServers());
@@ -73,7 +73,7 @@ public class S_1SC_1F_1AC_Test extends DncTest {
 	}
 
 	@ParameterizedTest(name = "[{arguments}]")
-	@MethodSource("de.uni_kl.cs.discodnc.DncTestMethodSources#provideSinkTreeArguments")
+	@MethodSource("de.uni_kl.cs.discodnc.func_tests.DncTestMethodSources#provideSinkTreeArguments")
 	public void f0_sinktree_arbMux(DncTestConfig test_config) {
 		initializeTest(test_config);
 		setMux(network.getServers());
