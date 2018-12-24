@@ -30,7 +30,7 @@ package de.uni_kl.cs.discodnc.func_tests;
 
 import de.uni_kl.cs.discodnc.AlgDncBackend;
 import de.uni_kl.cs.discodnc.AlgDncBackend_DNC_Affine;
-import de.uni_kl.cs.discodnc.AlgDncBackend_DNC_PwAffine;
+import de.uni_kl.cs.discodnc.AlgDncBackend_DNC_ConPwAffine;
 import de.uni_kl.cs.discodnc.AlgDncBackend_MPARTC_DISCO_Affine;
 import de.uni_kl.cs.discodnc.AlgDncBackend_MPARTC_DISCO_PwAffine;
 import de.uni_kl.cs.discodnc.AlgDncBackend_MPARTC_PwAffine;
@@ -38,12 +38,12 @@ import de.uni_kl.cs.discodnc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.AnalysisConfig.Multiplexing;
 import de.uni_kl.cs.discodnc.algebra.MinPlus;
 import de.uni_kl.cs.discodnc.algebra.disco.affine.MinPlus_Disco_Affine;
-import de.uni_kl.cs.discodnc.algebra.disco.pwaffine.MinPlus_Disco_PwAffine;
+import de.uni_kl.cs.discodnc.algebra.disco.con_pw_affine.MinPlus_Disco_ConPwAffine;
 import de.uni_kl.cs.discodnc.curves.Curve;
 import de.uni_kl.cs.discodnc.curves.LinearSegment;
 import de.uni_kl.cs.discodnc.curves.disco.LinearSegment_Disco;
 import de.uni_kl.cs.discodnc.curves.disco.affine.Curve_Disco_Affine;
-import de.uni_kl.cs.discodnc.curves.disco.pwaffine.Curve_Disco_PwAffine;
+import de.uni_kl.cs.discodnc.curves.disco.pw_affine.Curve_Disco_PwAffine;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
 
 import org.junit.jupiter.params.provider.Arguments;
@@ -137,7 +137,7 @@ public class DncTestMethodSources {
 		nums.add(NumBackend.RATIONAL_BIGINTEGER);
 
 		Set<AlgDncBackend> curves = new HashSet<AlgDncBackend>();
-		curves.add(AlgDncBackend_DNC_PwAffine.DISCO_PWAFFINE);
+		curves.add(AlgDncBackend_DNC_ConPwAffine.DISCO_CONPWAFFINE);
 		curves.add(AlgDncBackend_DNC_Affine.DISCO_AFFINE);
 
 		curves.add(AlgDncBackend_DNC_AffineC_PwAffineMP.DISCO_AFFINEC_PWAFFINEMP);
@@ -145,7 +145,7 @@ public class DncTestMethodSources {
 		
 		curves.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
 		curves.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
-		curves.add(AlgDncBackend_MPARTC_DISCO_PwAffine.MPARTC_PWAFFINEC_DISCO_PWAFFINEMP);
+		curves.add(AlgDncBackend_MPARTC_DISCO_PwAffine.MPARTC_PWAFFINEC_DISCO_CONPWAFFINEMP);
 
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
@@ -171,7 +171,7 @@ enum AlgDncBackend_DNC_AffineC_PwAffineMP implements AlgDncBackend {
 
 	@Override
 	public MinPlus getMinPlus() {
-		return MinPlus_Disco_PwAffine.MINPLUS_DISCO_PWAFFINE;
+		return MinPlus_Disco_ConPwAffine.MINPLUS_DISCO_CONPWAFFINE;
 	}
 
 	@Override
@@ -186,7 +186,7 @@ enum AlgDncBackend_DNC_AffineC_PwAffineMP implements AlgDncBackend {
 
     @Override
     public String toString() {
-         return assembleString(this.name(), MinPlus_Disco_PwAffine.MINPLUS_DISCO_PWAFFINE.name());
+         return assembleString(this.name(), MinPlus_Disco_ConPwAffine.MINPLUS_DISCO_CONPWAFFINE.name());
     }
 }
 
@@ -210,6 +210,6 @@ enum AlgDncBackend_DNC_PwAffineC_AffineMP implements AlgDncBackend {
 
     @Override
     public String toString() {
-    	return assembleString(this.name(), MinPlus_Disco_PwAffine.MINPLUS_DISCO_PWAFFINE.name());
+    	return assembleString(this.name(), MinPlus_Disco_ConPwAffine.MINPLUS_DISCO_CONPWAFFINE.name());
     }
 }
