@@ -28,6 +28,13 @@
 
 package de.uni_kl.cs.discodnc.func_tests;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.params.provider.Arguments;
+
 import de.uni_kl.cs.discodnc.AlgDncBackend;
 import de.uni_kl.cs.discodnc.AlgDncBackend_DNC_Affine;
 import de.uni_kl.cs.discodnc.AlgDncBackend_DNC_ConPwAffine;
@@ -45,13 +52,6 @@ import de.uni_kl.cs.discodnc.curves.disco.LinearSegment_Disco;
 import de.uni_kl.cs.discodnc.curves.disco.affine.Curve_Disco_Affine;
 import de.uni_kl.cs.discodnc.curves.disco.pw_affine.Curve_Disco_PwAffine;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
-
-import org.junit.jupiter.params.provider.Arguments;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Stream;
 
 public class DncTestMethodSources {
 

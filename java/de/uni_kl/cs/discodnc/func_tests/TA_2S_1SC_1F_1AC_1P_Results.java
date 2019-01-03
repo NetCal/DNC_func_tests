@@ -28,13 +28,15 @@
 
 package de.uni_kl.cs.discodnc.func_tests;
 
+import java.util.Set;
+
 import de.uni_kl.cs.discodnc.Calculator;
 import de.uni_kl.cs.discodnc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.AnalysisConfig.Multiplexing;
+import de.uni_kl.cs.discodnc.func_tests.DncTestMethodSources;
+import de.uni_kl.cs.discodnc.func_tests.DncTestResults;
 import de.uni_kl.cs.discodnc.numbers.Num;
 import de.uni_kl.cs.discodnc.tandem.Analysis.Analyses;
-
-import java.util.Set;
 
 public class TA_2S_1SC_1F_1AC_1P_Results extends DncTestResults {
 

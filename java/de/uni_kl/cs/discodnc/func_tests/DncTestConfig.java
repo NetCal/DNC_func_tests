@@ -28,11 +28,11 @@
 
 package de.uni_kl.cs.discodnc.func_tests;
 
+import java.util.Set;
+
 import de.uni_kl.cs.discodnc.AlgDncBackend;
 import de.uni_kl.cs.discodnc.AnalysisConfig;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
-
-import java.util.Set;
 
 public class DncTestConfig extends AnalysisConfig {
 	// Functional test specific parameters

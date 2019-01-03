@@ -29,17 +29,19 @@
 
 package de.uni_kl.cs.discodnc.func_tests;
 
+import java.util.Set;
+
 import de.uni_kl.cs.discodnc.Calculator;
 import de.uni_kl.cs.discodnc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.AnalysisConfig.Multiplexing;
+import de.uni_kl.cs.discodnc.func_tests.DncTestMethodSources;
+import de.uni_kl.cs.discodnc.func_tests.DncTestResults;
 import de.uni_kl.cs.discodnc.numbers.Num;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
 import de.uni_kl.cs.discodnc.numbers.implementations.RationalBigInt;
 import de.uni_kl.cs.discodnc.numbers.implementations.RealDoublePrecision;
 import de.uni_kl.cs.discodnc.numbers.implementations.RealSinglePrecision;
 import de.uni_kl.cs.discodnc.tandem.Analysis.Analyses;
-
-import java.util.Set;
 
 public class S_1SC_2F_2AC_Results extends DncTestResults {
 

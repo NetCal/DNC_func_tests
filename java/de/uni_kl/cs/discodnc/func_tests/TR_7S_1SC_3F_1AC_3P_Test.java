@@ -28,14 +28,17 @@
 
 package de.uni_kl.cs.discodnc.func_tests;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import de.uni_kl.cs.discodnc.func_tests.DncTest;
+import de.uni_kl.cs.discodnc.func_tests.DncTestConfig;
+import de.uni_kl.cs.discodnc.func_tests.TR_7S_1SC_3F_1AC_3P_Results;
+import de.uni_kl.cs.discodnc.func_tests.TR_7S_1SC_3F_1AC_3P_ServerGraph;
 import de.uni_kl.cs.discodnc.network.server_graph.Flow;
 import de.uni_kl.cs.discodnc.network.server_graph.ServerGraph;
 import de.uni_kl.cs.discodnc.tandem.analyses.PmooAnalysis;
 import de.uni_kl.cs.discodnc.tandem.analyses.SeparateFlowAnalysis;
 import de.uni_kl.cs.discodnc.tandem.analyses.TotalFlowAnalysis;
-
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 
 public class TR_7S_1SC_3F_1AC_3P_Test extends DncTest {
 	private static TR_7S_1SC_3F_1AC_3P_ServerGraph network_factory = new TR_7S_1SC_3F_1AC_3P_ServerGraph();

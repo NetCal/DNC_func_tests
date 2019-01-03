@@ -28,6 +28,9 @@
 
 package de.uni_kl.cs.discodnc.func_tests;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import de.uni_kl.cs.discodnc.curves.ArrivalCurve;
 import de.uni_kl.cs.discodnc.curves.Curve;
 import de.uni_kl.cs.discodnc.curves.ServiceCurve;
@@ -36,9 +39,6 @@ import de.uni_kl.cs.discodnc.network.server_graph.Server;
 import de.uni_kl.cs.discodnc.network.server_graph.ServerGraph;
 import de.uni_kl.cs.discodnc.network.server_graph.ServerGraphFactory;
 import de.uni_kl.cs.discodnc.network.server_graph.Turn;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class FF_4S_1SC_4F_1AC_4P_ServerGraph implements ServerGraphFactory {
 	private final int sc_R = 20;

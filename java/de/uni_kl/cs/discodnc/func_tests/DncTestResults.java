@@ -28,6 +28,11 @@
 
 package de.uni_kl.cs.discodnc.func_tests;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import de.uni_kl.cs.discodnc.Calculator;
 import de.uni_kl.cs.discodnc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.AnalysisConfig.Multiplexing;
@@ -35,11 +40,6 @@ import de.uni_kl.cs.discodnc.numbers.Num;
 import de.uni_kl.cs.discodnc.numbers.NumBackend;
 import de.uni_kl.cs.discodnc.tandem.AnalysisResults;
 import de.uni_kl.cs.discodnc.tandem.Analysis.Analyses;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public abstract class DncTestResults {
 	private Map<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>>> results_map;

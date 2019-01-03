@@ -28,11 +28,16 @@
 
 package de.uni_kl.cs.discodnc.func_tests;
 
+import java.util.Set;
+
 import de.uni_kl.cs.discodnc.AnalysisConfig;
 import de.uni_kl.cs.discodnc.Calculator;
 import de.uni_kl.cs.discodnc.AnalysisConfig.ArrivalBoundMethod;
 import de.uni_kl.cs.discodnc.AnalysisConfig.Multiplexing;
 import de.uni_kl.cs.discodnc.AnalysisConfig.MultiplexingEnforcement;
+import de.uni_kl.cs.discodnc.func_tests.DncTestConfig;
+import de.uni_kl.cs.discodnc.func_tests.DncTestMethodSources;
+import de.uni_kl.cs.discodnc.func_tests.DncTestResults;
 import de.uni_kl.cs.discodnc.network.server_graph.Flow;
 import de.uni_kl.cs.discodnc.network.server_graph.Server;
 import de.uni_kl.cs.discodnc.network.server_graph.ServerGraph;
@@ -45,8 +50,6 @@ import de.uni_kl.cs.discodnc.tandem.Analysis.Analyses;
 import de.uni_kl.cs.discodnc.tandem.analyses.PmooAnalysis;
 import de.uni_kl.cs.discodnc.tandem.analyses.SeparateFlowAnalysis;
 import de.uni_kl.cs.discodnc.tandem.analyses.TotalFlowAnalysis;
-
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
