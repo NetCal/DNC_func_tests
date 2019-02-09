@@ -155,6 +155,8 @@ public abstract class DncTestResults {
 	}
 
 	public Num getEpsilon(Integer flowId, Analyses analysis, Set<ArrivalBoundMethod> ab_set, Multiplexing mux, NumBackend num_rep) {
+		return Num.getFactory(num_rep).create(5e-4);
+		/*
 		Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Map<NumBackend, Num>>>> foi_maps = epsilon_map.get(flowId);
 		if(foi_maps == null || foi_maps.isEmpty()) {
 			return Num.getFactory(Calculator.getInstance().getNumBackend()).createZero();
@@ -185,6 +187,7 @@ public abstract class DncTestResults {
 		}
 		
 		return existing_epsilons.getOrDefault(num_rep, Num.getFactory(Calculator.getInstance().getNumBackend()).createZero());
+		*/
 	}
 
 	@Override

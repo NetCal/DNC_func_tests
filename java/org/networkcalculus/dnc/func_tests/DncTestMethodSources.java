@@ -141,11 +141,11 @@ public class DncTestMethodSources {
 		curves.add(AlgDncBackend_DNC_ConPwAffine.DISCO_CONPWAFFINE);
 		curves.add(AlgDncBackend_DNC_Affine.DISCO_AFFINE);
 
-		curves.add(AlgDncBackend_DNC_AffineC_PwAffineMP.DISCO_AFFINEC_PWAFFINEMP);
-		curves.add(AlgDncBackend_DNC_PwAffineC_AffineMP.DISCO_PWAFFINEC_AFFINEMP);
+		//curves.add(AlgDncBackend_DNC_AffineC_PwAffineMP.DISCO_AFFINEC_PWAFFINEMP);
+		//curves.add(AlgDncBackend_DNC_PwAffineC_AffineMP.DISCO_PWAFFINEC_AFFINEMP);
 		
 		curves.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
-		curves.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
+		//curves.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
 		curves.add(AlgDncBackend_MPARTC_DISCO_PwAffine.MPARTC_PWAFFINEC_DISCO_CONPWAFFINEMP);
 
 		// Parameter configurations for single arrival bounding tests:
