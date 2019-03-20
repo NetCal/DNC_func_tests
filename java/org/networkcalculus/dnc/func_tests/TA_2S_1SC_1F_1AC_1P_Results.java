@@ -33,8 +33,8 @@ import org.networkcalculus.dnc.AnalysisConfig.Multiplexing;
 import org.networkcalculus.dnc.Calculator;
 import org.networkcalculus.dnc.func_tests.DncTestMethodSources;
 import org.networkcalculus.dnc.func_tests.DncTestResults;
-import org.networkcalculus.dnc.numbers.Num;
 import org.networkcalculus.dnc.tandem.Analysis.Analyses;
+import org.networkcalculus.num.Num;
 
 public class TA_2S_1SC_1F_1AC_1P_Results extends DncTestResults {
 

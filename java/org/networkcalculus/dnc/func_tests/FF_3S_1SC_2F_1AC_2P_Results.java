@@ -33,12 +33,12 @@ import org.networkcalculus.dnc.AnalysisConfig.Multiplexing;
 import org.networkcalculus.dnc.Calculator;
 import org.networkcalculus.dnc.func_tests.DncTestMethodSources;
 import org.networkcalculus.dnc.func_tests.DncTestResults;
-import org.networkcalculus.dnc.numbers.Num;
-import org.networkcalculus.dnc.numbers.NumBackend;
-import org.networkcalculus.dnc.numbers.implementations.RationalBigInt;
-import org.networkcalculus.dnc.numbers.implementations.RealDoublePrecision;
-import org.networkcalculus.dnc.numbers.implementations.RealSinglePrecision;
 import org.networkcalculus.dnc.tandem.Analysis.Analyses;
+import org.networkcalculus.num.Num;
+import org.networkcalculus.num.NumBackend;
+import org.networkcalculus.num.implementations.RationalBigInt;
+import org.networkcalculus.num.implementations.RealDoublePrecision;
+import org.networkcalculus.num.implementations.RealSinglePrecision;
 
 public class FF_3S_1SC_2F_1AC_2P_Results extends DncTestResults {
 

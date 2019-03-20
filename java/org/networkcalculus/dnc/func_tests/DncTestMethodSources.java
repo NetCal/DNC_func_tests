@@ -52,7 +52,7 @@ import org.networkcalculus.dnc.curves.disco.pw_affine.Curve_Disco_PwAffine;
 import org.networkcalculus.dnc.func_tests.AlgDncBackend_DNC_AffineC_PwAffineMP;
 import org.networkcalculus.dnc.func_tests.AlgDncBackend_DNC_PwAffineC_AffineMP;
 import org.networkcalculus.dnc.func_tests.DncTestConfig;
-import org.networkcalculus.dnc.numbers.NumBackend;
+import org.networkcalculus.num.NumBackend;
 
 public class DncTestMethodSources {
 

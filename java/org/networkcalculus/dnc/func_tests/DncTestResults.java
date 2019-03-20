@@ -34,10 +34,10 @@ import java.util.Set;
 import org.networkcalculus.dnc.AnalysisConfig.ArrivalBoundMethod;
 import org.networkcalculus.dnc.AnalysisConfig.Multiplexing;
 import org.networkcalculus.dnc.Calculator;
-import org.networkcalculus.dnc.numbers.Num;
-import org.networkcalculus.dnc.numbers.NumBackend;
 import org.networkcalculus.dnc.tandem.AnalysisResults;
 import org.networkcalculus.dnc.tandem.Analysis.Analyses;
+import org.networkcalculus.num.Num;
+import org.networkcalculus.num.NumBackend;
 
 public abstract class DncTestResults {
 	private Map<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>>> results_map;
