@@ -40,7 +40,6 @@ import org.networkcalculus.dnc.network.server_graph.Flow;
 import org.networkcalculus.dnc.network.server_graph.Server;
 import org.networkcalculus.dnc.network.server_graph.ServerGraph;
 import org.networkcalculus.dnc.network.server_graph.ServerGraphFactory;
-import org.networkcalculus.dnc.numbers.Num;
 import org.networkcalculus.dnc.sinktree.Backlog_SinkTree;
 import org.networkcalculus.dnc.tandem.Analysis;
 import org.networkcalculus.dnc.tandem.AnalysisResults;
@@ -48,6 +47,7 @@ import org.networkcalculus.dnc.tandem.Analysis.Analyses;
 import org.networkcalculus.dnc.tandem.analyses.PmooAnalysis;
 import org.networkcalculus.dnc.tandem.analyses.SeparateFlowAnalysis;
 import org.networkcalculus.dnc.tandem.analyses.TotalFlowAnalysis;
+import org.networkcalculus.num.Num;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

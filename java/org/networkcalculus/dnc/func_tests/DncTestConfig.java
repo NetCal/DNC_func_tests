@@ -30,7 +30,7 @@ import java.util.Set;
 
 import org.networkcalculus.dnc.AlgDncBackend;
 import org.networkcalculus.dnc.AnalysisConfig;
-import org.networkcalculus.dnc.numbers.NumBackend;
+import org.networkcalculus.num.NumBackend;
 
 public class DncTestConfig extends AnalysisConfig {
 	// Functional test specific parameters
