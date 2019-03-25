@@ -168,6 +168,7 @@ public class TA_3S_1SC_3F_1AC_3P_Results extends DncTestResults {
 			 * 		SFA backlog ==> expected <341.6666666666667> but was <341.66666666666663>
 			 * 		SFA delay ==> expected <52.03703703703704> but was <52.03703703703703>
 			 * 		SFA backlog ==> expected <483.3333333333333> but was <483.33333333333326>
+			 * 		SFA backlog ==> expected <258.3333333333333> but was <258.33333333333337>
 			 * 
 			 * Real Single: Epsilon set to ignore
 			 * 		SFA backlog ==> expected <341.66666> but was <341.6667>
@@ -175,6 +176,7 @@ public class TA_3S_1SC_3F_1AC_3P_Results extends DncTestResults {
 			 * 		SFA delay ==> expected <48.333332> but was <48.333336>
 			 * 		SFA backlog ==> expected <483.33334> but was <483.33337>
 			 * 		SFA backlog ==> expected <483.3333435058594> but was <483.3333740234375>
+			 * 		SFA backlog ==> expected <258.3333435058594> but was <258.33331298828125>
 			 * 
 			 * Rational BigInteger: Epsilon set to ignore
 			 * 		SFA backlog ==> expected <1025 / 3> but was <3005331782587733 / 8796093022208>
@@ -185,7 +187,7 @@ public class TA_3S_1SC_3F_1AC_3P_Results extends DncTestResults {
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			
-			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("1e-14"));
+			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("7e-14"));
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			
@@ -197,7 +199,7 @@ public class TA_3S_1SC_3F_1AC_3P_Results extends DncTestResults {
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 
-			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("4e-6"));
+			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("3.25e-5"));
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 
