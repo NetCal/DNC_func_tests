@@ -116,10 +116,6 @@ public abstract class DncTestResults {
 		
 		if(existing_results.size() == 1) {
 			return existing_results.iterator().next();
-		}
-
-		if( existing_results.isEmpty() ) {
-			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		} else {
 			System.out.println( existing_results.toString() );
 			throw new RuntimeException("Ambiguous DNC test results! The results file may be corrupted.");
