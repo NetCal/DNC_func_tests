@@ -89,12 +89,12 @@ public abstract class DncTestResults {
 	public AnalysisResults getBounds(Integer flowId, Analyses analysis, Set<ArrivalBoundMethod> ab_set, Multiplexing mux) {
 		Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>> foi_maps = results_map.get(flowId);
 		if(foi_maps == null || foi_maps.isEmpty()) {
-			throw new RuntimeException("No DNC test results fournd! The results file may be corrupted.");
+			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		}
 		
 		Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>> foi_analysis_maps = foi_maps.get(analysis);
 		if(foi_analysis_maps == null || foi_analysis_maps.isEmpty()) {
-			throw new RuntimeException("No DNC test results fournd! The results file may be corrupted.");
+			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		}
 		
 		Map<Multiplexing, Set<AnalysisResults>> foi_analysis_ab_maps = new HashMap<Multiplexing, Set<AnalysisResults>>(); 
@@ -106,12 +106,12 @@ public abstract class DncTestResults {
 			}
 		}
 		if(foi_analysis_ab_maps.isEmpty()) {
-			throw new RuntimeException("No DNC test results fournd! The results file may be corrupted.");
+			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		}
 		
 		Set<AnalysisResults> existing_results = foi_analysis_ab_maps.get(mux);
 		if(existing_results == null || existing_results.isEmpty()) {
-			throw new RuntimeException("No DNC test results fournd! The results file may be corrupted.");
+			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		}
 		
 		if(existing_results.size() == 1) {
@@ -119,7 +119,7 @@ public abstract class DncTestResults {
 		}
 
 		if( existing_results.isEmpty() ) {
-			throw new RuntimeException("No DNC test results fournd! The results file may be corrupted.");
+			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		} else {
 			System.out.println( existing_results.toString() );
 			throw new RuntimeException("Ambiguous DNC test results! The results file may be corrupted.");
