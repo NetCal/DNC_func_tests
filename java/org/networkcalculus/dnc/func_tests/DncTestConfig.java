@@ -81,14 +81,13 @@ public class DncTestConfig extends AnalysisConfig {
 
 	@Override
 	public String toString() {
-		// AB, convolve alternative ABs, mux,
-		// global mux def, numbers, curves
+		// AB, convolve alternative ABs, mux, global mux def, numbers, curves
 		StringBuffer func_test_str = new StringBuffer();
 
 		func_test_str.append(arrivalBoundMethods().toString());
 
-		if (removeDuplicateArrivalBounds()) {
-			func_test_str.append(", " + "rm dupl ABs");
+		if (convolveAlternativeArrivalBounds()) {
+			func_test_str.append(", " + "conv ABs");
 		}
 
 		func_test_str.append(", " + multiplexing.toString());
