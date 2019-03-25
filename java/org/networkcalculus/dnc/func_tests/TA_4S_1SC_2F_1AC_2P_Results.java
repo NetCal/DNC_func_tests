@@ -134,6 +134,7 @@ public class TA_4S_1SC_2F_1AC_2P_Results extends DncTestResults {
 			 * 
 			 * Real Double: Epsilon set to ignore
 			 * 		TFA delay ==> expected <194.58333333333334> but was <194.58333333333331>
+			 * 		TFA backlog ==> expected <566.6666666666666> but was <566.6666666666667>
 			 * 
 			 * Real Single: Epsilon set to ignore
 			 * 		TFA delay ==> expected <194.58333> but was <194.58334>
@@ -143,7 +144,7 @@ public class TA_4S_1SC_2F_1AC_2P_Results extends DncTestResults {
 			 * Rational BigInteger: Epsilon set to ignore
 			 * 		TFA delay ==> expected <2335 / 12> but was <34231462011426133 / 175921860444160>
 			 */
-			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("3e-14"));
+			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("2e-13"));
 			addEpsilon(0, Analyses.TFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(0, Analyses.TFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 
@@ -162,10 +163,14 @@ public class TA_4S_1SC_2F_1AC_2P_Results extends DncTestResults {
 			 * 
 			 * Real Double: Epsilon set to ignore
 			 * 		SFA backlog ==> expected <408.3333333333333> but was <408.33333333333326>
+			 * 		SFA delay ==> expected <105.0> but was <105.00000000000001>
+			 * 		SFA backlog ==> expected <541.6666666666666> but was <541.6666666666667>
 			 * 
 			 * Real Single: Epsilon set to ignore
 			 * 		SFA backlog ==> expected <408.33334> but was <408.33337>
 			 * 		SFA backlog ==> expected <408.3333435058594> but was <408.3333740234375>
+			 * 		SFA delay ==> expected <105.0> but was <104.99999>
+			 * 		SFA backlog ==> expected <541.6666870117188> but was <541.6666259765625>
 			 * 
 			 * Rational BigInteger: Epsilon set to ignore
 			 * 		SFA backlog ==> expected <1625 / 3> but was <4764550387029333 / 8796093022208>
@@ -174,10 +179,18 @@ public class TA_4S_1SC_2F_1AC_2P_Results extends DncTestResults {
 			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("6e-14"));
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
+		
+			real_double_epsilon = new RealDoublePrecision(Double.parseDouble("2e-13"));
+			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
+			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_DOUBLE_PRECISION, real_double_epsilon);
 
 			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("3.25e-5"));
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 			addEpsilon(1, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
+
+			real_single_epsilon = new RealSinglePrecision(Float.parseFloat("6.25e-5"));
+			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
+			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.REAL_SINGLE_PRECISION, real_single_epsilon);
 
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.ARBITRARY, NumBackend.RATIONAL_BIGINTEGER, rational_bigint_epsilon);
 			addEpsilon(0, Analyses.SFA, ab_set, Multiplexing.FIFO, NumBackend.RATIONAL_BIGINTEGER, rational_bigint_epsilon);

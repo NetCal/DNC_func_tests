@@ -47,9 +47,7 @@ import org.networkcalculus.dnc.algebra.disco.con_pw_affine.MinPlus_Disco_ConPwAf
 import org.networkcalculus.dnc.curves.Curve;
 import org.networkcalculus.dnc.curves.LinearSegment;
 import org.networkcalculus.dnc.curves.disco.LinearSegment_Disco;
-import org.networkcalculus.dnc.curves.disco.affine.Curve_Disco_Affine;
 import org.networkcalculus.dnc.curves.disco.pw_affine.Curve_Disco_PwAffine;
-import org.networkcalculus.dnc.func_tests.AlgDncBackend_DNC_AffineC_PwAffineMP;
 import org.networkcalculus.dnc.func_tests.AlgDncBackend_DNC_PwAffineC_AffineMP;
 import org.networkcalculus.dnc.func_tests.DncTestConfig;
 import org.networkcalculus.num.NumBackend;
@@ -141,7 +139,6 @@ public class DncTestMethodSources {
 		curves.add(AlgDncBackend_DNC_ConPwAffine.DISCO_CONPWAFFINE);
 		curves.add(AlgDncBackend_DNC_Affine.DISCO_AFFINE);
 
-		curves.add(AlgDncBackend_DNC_AffineC_PwAffineMP.DISCO_AFFINEC_PWAFFINEMP);
 		curves.add(AlgDncBackend_DNC_PwAffineC_AffineMP.DISCO_PWAFFINEC_AFFINEMP);
 		
 		curves.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
@@ -165,30 +162,6 @@ public class DncTestMethodSources {
 
 		return test_configurations;
 	}
-}
-
-enum AlgDncBackend_DNC_AffineC_PwAffineMP implements AlgDncBackend {
-	DISCO_AFFINEC_PWAFFINEMP;
-
-	@Override
-	public MinPlus getMinPlus() {
-		return MinPlus_Disco_ConPwAffine.MINPLUS_DISCO_CONPWAFFINE;
-	}
-
-	@Override
-	public Curve getCurveFactory() {
-		return Curve_Disco_Affine.getFactory();
-	}
-
-	@Override
-	public LinearSegment.Builder getLinearSegmentFactory() {
-		return LinearSegment_Disco.getBuilder();
-	}
-
-    @Override
-    public String toString() {
-         return assembleString(this.name(), MinPlus_Disco_ConPwAffine.MINPLUS_DISCO_CONPWAFFINE.name());
-    }
 }
 
 enum AlgDncBackend_DNC_PwAffineC_AffineMP implements AlgDncBackend {
