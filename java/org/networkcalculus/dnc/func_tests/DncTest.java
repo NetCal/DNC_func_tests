@@ -71,12 +71,6 @@ public abstract class DncTest {
 		this.test_config = test_config;
 		printSetting();
 
-		if (test_config.enable_checks) {
-			Calculator.getInstance().enableAllChecks();
-		} else {
-			Calculator.getInstance().disableAllChecks();
-		}
-
 		Calculator.getInstance().setCurveBackend(test_config.getCurveBackend());
 		Calculator.getInstance().setNumBackend(test_config.getNumBackend());
 

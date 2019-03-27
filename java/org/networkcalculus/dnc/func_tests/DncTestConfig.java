@@ -39,7 +39,6 @@ public class DncTestConfig extends AnalysisConfig {
 	protected boolean console_output = false;
 
 	// Calculator configuration
-	protected boolean enable_checks = false;
 	protected NumBackend num_backend;
 	protected AlgDncBackend curve_backend;
 
