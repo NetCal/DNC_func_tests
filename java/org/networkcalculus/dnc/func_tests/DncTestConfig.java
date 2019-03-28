@@ -46,14 +46,16 @@ public class DncTestConfig extends AnalysisConfig {
 	private DncTestConfig() {
 	}
 
-	public DncTestConfig(Set<ArrivalBoundMethod> arrival_bound_methods, boolean convolve_alternative_arrival_bounds,
+	public DncTestConfig(Set<ArrivalBoundMethod> arrival_bound_methods, 
+			boolean arrival_bounds_caching, boolean convolve_alternative_arrival_bounds,
 			AnalysisConfig.Multiplexing multiplexing,
 			boolean define_multiplexing_globally, NumBackend numbers, AlgDncBackend curves ) {
 
 		super(AnalysisConfig.MultiplexingEnforcement.GLOBAL_ARBITRARY, // Not used, no influence yet.
 				MaxScEnforcement.GLOBALLY_OFF, // Not used, no influence yet.
 				MaxScEnforcement.GLOBALLY_OFF, // Not used, no influence yet.
-				arrival_bound_methods, convolve_alternative_arrival_bounds, false);
+				arrival_bound_methods, 
+				convolve_alternative_arrival_bounds, arrival_bounds_caching, false);
 
 		this.multiplexing = multiplexing;
 		this.define_multiplexing_globally = define_multiplexing_globally;
@@ -84,9 +86,13 @@ public class DncTestConfig extends AnalysisConfig {
 		StringBuffer func_test_str = new StringBuffer();
 
 		func_test_str.append(arrivalBoundMethods().toString());
-
+		
 		if (convolveAlternativeArrivalBounds()) {
 			func_test_str.append(", " + "conv ABs");
+		}
+		
+		if (useArrivalBoundsCache()) {
+			func_test_str.append(", " + "AB cache");
 		}
 
 		func_test_str.append(", " + multiplexing.toString());

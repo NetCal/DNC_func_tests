@@ -151,10 +151,14 @@ public class DncTestMethodSources {
 			for (NumBackend num : nums) {
 				for (Set<ArrivalBoundMethod> ab : ab_sets) {
 					for (Multiplexing mux : mux_disciplines) {
-						test_configurations.add(new DncTestConfig(ab, false, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, mux, true, num, curve));
+						test_configurations.add(new DncTestConfig(ab, false, false, mux, false, num, curve));
+						test_configurations.add(new DncTestConfig(ab, false, false, mux, true, num, curve));
+						test_configurations.add(new DncTestConfig(ab, false, true, mux, false, num, curve));
+						test_configurations.add(new DncTestConfig(ab, false, true, mux, true, num, curve));
+						test_configurations.add(new DncTestConfig(ab, true, false, mux, false, num, curve));
+						test_configurations.add(new DncTestConfig(ab, true, false, mux, true, num, curve));
+						test_configurations.add(new DncTestConfig(ab, true, true, mux, false, num, curve));
+						test_configurations.add(new DncTestConfig(ab, true, true, mux, true, num, curve));
 					}
 				}
 			}
