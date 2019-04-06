@@ -37,7 +37,7 @@ import org.networkcalculus.dnc.AlgDncBackend;
 import org.networkcalculus.dnc.AlgDncBackend_DNC_Affine;
 import org.networkcalculus.dnc.AlgDncBackend_DNC_ConPwAffine;
 import org.networkcalculus.dnc.AlgDncBackend_MPARTC_DISCO_Affine;
-import org.networkcalculus.dnc.AlgDncBackend_MPARTC_DISCO_PwAffine;
+import org.networkcalculus.dnc.AlgDncBackend_MPARTC_DISCO_ConPwAffine;
 import org.networkcalculus.dnc.AlgDncBackend_MPARTC_PwAffine;
 import org.networkcalculus.dnc.AnalysisConfig.ArrivalBoundMethod;
 import org.networkcalculus.dnc.AnalysisConfig.Multiplexing;
@@ -147,7 +147,7 @@ public class DncTestMethodSources {
 		
 		curves.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
 		curves.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
-		curves.add(AlgDncBackend_MPARTC_DISCO_PwAffine.MPARTC_PWAFFINEC_DISCO_CONPWAFFINEMP);
+		curves.add(AlgDncBackend_MPARTC_DISCO_ConPwAffine.MPARTC_PWAFFINEC_DISCO_CONPWAFFINEMP);
 
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
