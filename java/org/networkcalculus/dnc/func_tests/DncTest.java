@@ -32,6 +32,7 @@ import org.networkcalculus.dnc.AnalysisConfig;
 import org.networkcalculus.dnc.AnalysisConfig.ArrivalBoundMethod;
 import org.networkcalculus.dnc.AnalysisConfig.Multiplexing;
 import org.networkcalculus.dnc.AnalysisConfig.MultiplexingEnforcement;
+import org.networkcalculus.dnc.feedforward.ArrivalBoundDispatch;
 import org.networkcalculus.dnc.Calculator;
 import org.networkcalculus.dnc.func_tests.DncTestConfig;
 import org.networkcalculus.dnc.func_tests.DncTestMethodSources;
@@ -73,7 +74,8 @@ public abstract class DncTest {
 
 		Calculator.getInstance().setCurveBackend(test_config.getCurveBackend());
 		Calculator.getInstance().setNumBackend(test_config.getNumBackend());
-
+		ArrivalBoundDispatch.clearAllCaches();
+		
 		// reinitialize the server graph and the expected bounds
 		sg_factory.reinitializeCurves();
 		expected_results.initialize();
