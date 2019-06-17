@@ -34,7 +34,7 @@ import org.networkcalculus.dnc.AnalysisConfig.Multiplexing;
 import org.networkcalculus.dnc.Calculator;
 import org.networkcalculus.dnc.func_tests.DncTestMethodSources;
 import org.networkcalculus.dnc.func_tests.DncTestResults;
-import org.networkcalculus.dnc.tandem.Analysis.Analyses;
+import org.networkcalculus.dnc.tandem.TandemAnalysis.Analyses;
 import org.networkcalculus.num.Num;
 import org.networkcalculus.num.NumBackend;
 import org.networkcalculus.num.implementations.RationalBigInt;

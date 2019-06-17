@@ -32,6 +32,7 @@ import org.networkcalculus.dnc.AnalysisConfig;
 import org.networkcalculus.dnc.AnalysisConfig.ArrivalBoundMethod;
 import org.networkcalculus.dnc.AnalysisConfig.Multiplexing;
 import org.networkcalculus.dnc.AnalysisConfig.MultiplexingEnforcement;
+import org.networkcalculus.dnc.feedforward.ArrivalBoundDispatch;
 import org.networkcalculus.dnc.Calculator;
 import org.networkcalculus.dnc.func_tests.DncTestConfig;
 import org.networkcalculus.dnc.func_tests.DncTestMethodSources;
@@ -41,9 +42,9 @@ import org.networkcalculus.dnc.network.server_graph.Server;
 import org.networkcalculus.dnc.network.server_graph.ServerGraph;
 import org.networkcalculus.dnc.network.server_graph.ServerGraphFactory;
 import org.networkcalculus.dnc.sinktree.Backlog_SinkTree;
-import org.networkcalculus.dnc.tandem.Analysis;
-import org.networkcalculus.dnc.tandem.AnalysisResults;
-import org.networkcalculus.dnc.tandem.Analysis.Analyses;
+import org.networkcalculus.dnc.tandem.TandemAnalysis;
+import org.networkcalculus.dnc.tandem.TandemAnalysisResults;
+import org.networkcalculus.dnc.tandem.TandemAnalysis.Analyses;
 import org.networkcalculus.dnc.tandem.analyses.PmooAnalysis;
 import org.networkcalculus.dnc.tandem.analyses.SeparateFlowAnalysis;
 import org.networkcalculus.dnc.tandem.analyses.TotalFlowAnalysis;
@@ -73,7 +74,8 @@ public abstract class DncTest {
 
 		Calculator.getInstance().setCurveBackend(test_config.getCurveBackend());
 		Calculator.getInstance().setNumBackend(test_config.getNumBackend());
-
+		ArrivalBoundDispatch.clearAllCaches();
+		
 		// reinitialize the server graph and the expected bounds
 		sg_factory.reinitializeCurves();
 		expected_results.initialize();
@@ -118,7 +120,7 @@ public abstract class DncTest {
 		}
 	}
 
-	private void runAnalysis(Analysis analysis, Flow flow_of_interest) {
+	private void runAnalysis(TandemAnalysis analysis, Flow flow_of_interest) {
 		try {
 			analysis.performAnalysis(flow_of_interest);
 		} catch (Exception e) {
@@ -149,7 +151,7 @@ public abstract class DncTest {
 		// The alias holds the original flow ID, independent of the order flows are added to the server graph under analysis.
 		Integer foiID_from_alias = Integer.valueOf(flow_of_interest.getAlias().substring(1));
 		
-		AnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.TFA, test_config.arrivalBoundMethods(), test_config.multiplexing);
+		TandemAnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.TFA, test_config.arrivalBoundMethods(), test_config.multiplexing);
 		
 		Num epsilon = expected_results.getEpsilon(foiID_from_alias, Analyses.TFA, 
 				test_config.arrivalBoundMethods(), test_config.multiplexing, test_config.getNumBackend());
@@ -200,7 +202,7 @@ public abstract class DncTest {
 		// The alias holds the original flow ID, independent of the order flows are added to the server graph under analysis.
 		Integer foiID_from_alias = Integer.valueOf(flow_of_interest.getAlias().substring(1));
 		
-		AnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.SFA, test_config.arrivalBoundMethods(), test_config.multiplexing);
+		TandemAnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.SFA, test_config.arrivalBoundMethods(), test_config.multiplexing);
 		
 		Num epsilon = expected_results.getEpsilon(foiID_from_alias, Analyses.SFA, 
 				test_config.arrivalBoundMethods(), test_config.multiplexing, test_config.getNumBackend());
@@ -255,7 +257,7 @@ public abstract class DncTest {
 		// The alias holds the original flow ID, independent of the order flows are added to the server graph under analysis.
 		Integer foiID_from_alias = Integer.valueOf(flow_of_interest.getAlias().substring(1));
 		
-		AnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.PMOO, test_config.arrivalBoundMethods(), test_config.multiplexing);
+		TandemAnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.PMOO, test_config.arrivalBoundMethods(), test_config.multiplexing);
 		
 		Num epsilon = expected_results.getEpsilon(foiID_from_alias, Analyses.PMOO, 
 				test_config.arrivalBoundMethods(), test_config.multiplexing, test_config.getNumBackend());
@@ -324,7 +326,7 @@ public abstract class DncTest {
 		// The alias holds the original flow ID, independent of the order flows are added to the server graph under analysis.
 		Integer foiID_from_alias = Integer.valueOf(flow_of_interest.getAlias().substring(1));
 
-		AnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.PMOO, DncTestMethodSources.sinktree, Multiplexing.ARBITRARY);
+		TandemAnalysisResults bounds = expected_results.getBounds(foiID_from_alias, Analyses.PMOO, DncTestMethodSources.sinktree, Multiplexing.ARBITRARY);
 
 		Num epsilon = expected_results.getEpsilon(foiID_from_alias, Analyses.PMOO, 
 				test_config.arrivalBoundMethods(), test_config.multiplexing, test_config.getNumBackend());

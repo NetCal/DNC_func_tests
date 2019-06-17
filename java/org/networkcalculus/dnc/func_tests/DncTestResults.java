@@ -34,17 +34,17 @@ import java.util.Set;
 import org.networkcalculus.dnc.AnalysisConfig.ArrivalBoundMethod;
 import org.networkcalculus.dnc.AnalysisConfig.Multiplexing;
 import org.networkcalculus.dnc.Calculator;
-import org.networkcalculus.dnc.tandem.AnalysisResults;
-import org.networkcalculus.dnc.tandem.Analysis.Analyses;
+import org.networkcalculus.dnc.tandem.TandemAnalysisResults;
+import org.networkcalculus.dnc.tandem.TandemAnalysis.Analyses;
 import org.networkcalculus.num.Num;
 import org.networkcalculus.num.NumBackend;
 
 public abstract class DncTestResults {
-	private Map<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>>> results_map;
+	private Map<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>>>> results_map;
 	private Map<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Map<NumBackend, Num>>>>> epsilon_map;
 	
 	public DncTestResults() {
-		results_map = new HashMap<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>>>();
+		results_map = new HashMap<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>>>>();
 		epsilon_map = new HashMap<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Map<NumBackend, Num>>>>>();
 	}
 
@@ -57,48 +57,48 @@ public abstract class DncTestResults {
 
 	// TODO Some batch mode would be nice in order not to query the maps for every analysis of the same flow.
 	protected void addBounds(Integer flowId, Analyses analysis, Set<ArrivalBoundMethod> ab_set, Multiplexing mux, Num delay, Num backlog) {
-		AnalysisResults expected_results = new AnalysisResults(delay, backlog, null);
+		TandemAnalysisResults expected_results = new TandemAnalysisResults(delay, backlog, null);
 
-		Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>> foi_maps = results_map.get(flowId);
+		Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>>> foi_maps = results_map.get(flowId);
 		if(foi_maps == null) {
-			foi_maps = new HashMap<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>>();
+			foi_maps = new HashMap<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>>>();
 			results_map.put(flowId, foi_maps);
 		}
 		
-		Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>> foi_analysis_maps = foi_maps.get(analysis);
+		Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>> foi_analysis_maps = foi_maps.get(analysis);
 		if(foi_analysis_maps == null) {
-			foi_analysis_maps =  new HashMap<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>();
+			foi_analysis_maps =  new HashMap<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>>();
 			foi_maps.put(analysis, foi_analysis_maps);
 		}
 		
-		Map<Multiplexing, Set<AnalysisResults>> foi_analysis_ab_maps = foi_analysis_maps.get(ab_set);
+		Map<Multiplexing, Set<TandemAnalysisResults>> foi_analysis_ab_maps = foi_analysis_maps.get(ab_set);
 		if(foi_analysis_ab_maps == null) {
-			foi_analysis_ab_maps = new HashMap<Multiplexing, Set<AnalysisResults>>();
+			foi_analysis_ab_maps = new HashMap<Multiplexing, Set<TandemAnalysisResults>>();
 			foi_analysis_maps.put(ab_set, foi_analysis_ab_maps);
 		}
 		
-		Set<AnalysisResults> existing_results = foi_analysis_ab_maps.get(mux);
+		Set<TandemAnalysisResults> existing_results = foi_analysis_ab_maps.get(mux);
 		if(existing_results == null) {
-			existing_results = new HashSet<AnalysisResults>();
+			existing_results = new HashSet<TandemAnalysisResults>();
 			foi_analysis_ab_maps.put(mux, existing_results);
 		}
 
 		existing_results.add(expected_results);
 	}
 
-	public AnalysisResults getBounds(Integer flowId, Analyses analysis, Set<ArrivalBoundMethod> ab_set, Multiplexing mux) {
-		Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>> foi_maps = results_map.get(flowId);
+	public TandemAnalysisResults getBounds(Integer flowId, Analyses analysis, Set<ArrivalBoundMethod> ab_set, Multiplexing mux) {
+		Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>>> foi_maps = results_map.get(flowId);
 		if(foi_maps == null || foi_maps.isEmpty()) {
 			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		}
 		
-		Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>> foi_analysis_maps = foi_maps.get(analysis);
+		Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>> foi_analysis_maps = foi_maps.get(analysis);
 		if(foi_analysis_maps == null || foi_analysis_maps.isEmpty()) {
 			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		}
 		
-		Map<Multiplexing, Set<AnalysisResults>> foi_analysis_ab_maps = new HashMap<Multiplexing, Set<AnalysisResults>>(); 
-		for(Map.Entry<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>> abs_to_map : foi_analysis_maps.entrySet()) {
+		Map<Multiplexing, Set<TandemAnalysisResults>> foi_analysis_ab_maps = new HashMap<Multiplexing, Set<TandemAnalysisResults>>(); 
+		for(Map.Entry<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>> abs_to_map : foi_analysis_maps.entrySet()) {
 			if( abs_to_map.getKey().size() == ab_set.size()
 					&& abs_to_map.getKey().containsAll(ab_set)) {
 				foi_analysis_ab_maps = abs_to_map.getValue();
@@ -109,7 +109,7 @@ public abstract class DncTestResults {
 			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		}
 		
-		Set<AnalysisResults> existing_results = foi_analysis_ab_maps.get(mux);
+		Set<TandemAnalysisResults> existing_results = foi_analysis_ab_maps.get(mux);
 		if(existing_results == null || existing_results.isEmpty()) {
 			throw new RuntimeException("No DNC test results found! The results file may be corrupted.");
 		}
@@ -188,20 +188,20 @@ public abstract class DncTestResults {
 		StringBuffer exp_results_str = new StringBuffer();
 		String analysis_str, ab_str, mux_str; 
 		
-		for( Map.Entry<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>>> foi_map_entry : results_map.entrySet() ) {
+		for( Map.Entry<Integer, Map<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>>>> foi_map_entry : results_map.entrySet() ) {
 			exp_results_str.append("flow Id: " + foi_map_entry.getKey().toString());
 			exp_results_str.append("\n");
 			
-			for( Map.Entry<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>>> analysis_map_entry : foi_map_entry.getValue().entrySet() ) {
+			for( Map.Entry<Analyses, Map<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>>> analysis_map_entry : foi_map_entry.getValue().entrySet() ) {
 				analysis_str = "\t" + "Analysis: " + analysis_map_entry.getKey().toString();
 				
-				for( Map.Entry<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<AnalysisResults>>> ab_map_entry : analysis_map_entry.getValue().entrySet() ) {
+				for( Map.Entry<Set<ArrivalBoundMethod>, Map<Multiplexing, Set<TandemAnalysisResults>>> ab_map_entry : analysis_map_entry.getValue().entrySet() ) {
 					ab_str = "; " + "Arrival Boundings: " + ab_map_entry.getKey().toString();
 					
-					for( Map.Entry<Multiplexing, Set<AnalysisResults>> mux_map_entry : ab_map_entry.getValue().entrySet() ) {
+					for( Map.Entry<Multiplexing, Set<TandemAnalysisResults>> mux_map_entry : ab_map_entry.getValue().entrySet() ) {
 						mux_str = "; " + "Multiplexing: " + mux_map_entry.getKey().toString();
 						
-						for( AnalysisResults stored_results : mux_map_entry.getValue() ) {
+						for( TandemAnalysisResults stored_results : mux_map_entry.getValue() ) {
 							exp_results_str.append( analysis_str );
 							exp_results_str.append( ab_str );
 							exp_results_str.append( mux_str );
