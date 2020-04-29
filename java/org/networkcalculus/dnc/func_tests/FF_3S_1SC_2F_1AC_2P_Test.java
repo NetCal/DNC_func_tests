@@ -68,7 +68,7 @@ public class FF_3S_1SC_2F_1AC_2P_Test extends DncTest {
 	}
 
 	@ParameterizedTest(name = "[{arguments}]")
-	@MethodSource("org.networkcalculus.dnc.func_tests.DncTestMethodSources#provideArbArguments")
+	@MethodSource("org.networkcalculus.dnc.func_tests.DncTestMethodSources#provideArbPmooArguments")
 	public void f0_pmoo_arbMux(DncTestConfig test_config) {
 		initializeTest(test_config);
 		setMux(network.getServers());
@@ -109,7 +109,7 @@ public class FF_3S_1SC_2F_1AC_2P_Test extends DncTest {
 	}
 	
 	@ParameterizedTest(name = "[{arguments}]")
-	@MethodSource("org.networkcalculus.dnc.func_tests.DncTestMethodSources#provideArbArguments")
+	@MethodSource("org.networkcalculus.dnc.func_tests.DncTestMethodSources#provideArbPmooArguments")
 	public void f1_pmoo_arbMux(DncTestConfig test_config) {
 		initializeTest(test_config);
 		setMux(network.getServers());

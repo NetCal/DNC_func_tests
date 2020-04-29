@@ -109,30 +109,53 @@ public class DncTestMethodSources {
 	}
 
 	public static Stream<Arguments> provideAllArguments() {
-		return Stream.concat(provideArbArguments(), provideFifoArguments());
+		return Stream.concat(
+					Stream.concat(provideArbNonPmooArguments(), provideArbPmooArguments()),
+					provideFifoExclPmooArguments()
+				);
 	}
 	
-	protected static Stream<Arguments> provideArbArguments() {
-		return createParameters(Collections.singleton(Multiplexing.ARBITRARY), ab_sets).stream().map(Arguments::of);
-	}
-	
-	protected static Stream<Arguments> provideFifoArguments() {
-		Set<Set<ArrivalBoundMethod>> ab_sets_fifo = new HashSet<Set<ArrivalBoundMethod>>();
-		ab_sets_fifo.add(single_1);
-		ab_sets_fifo.add(single_2);
-		ab_sets_fifo.add(pair_1);
+	protected static Stream<Arguments> provideArbNonPmooArguments() {
+		Set<Set<ArrivalBoundMethod>> ab_sets_excl_pmoo = new HashSet<Set<ArrivalBoundMethod>>();
+		ab_sets_excl_pmoo.add(single_1);
+		ab_sets_excl_pmoo.add(single_2);
+		ab_sets_excl_pmoo.add(pair_1);
 		
-		return createParameters(Collections.singleton(Multiplexing.FIFO), ab_sets_fifo).stream().map(Arguments::of);
+		return createParameters(Collections.singleton(Multiplexing.FIFO), ab_sets_excl_pmoo, new HashSet<AlgDncBackend>())
+				.stream().map(Arguments::of);
+	}
+	
+	protected static Stream<Arguments> provideArbPmooArguments() {
+		Set<Set<ArrivalBoundMethod>> ab_sets_incl_pmoo = new HashSet<Set<ArrivalBoundMethod>>();
+		ab_sets_incl_pmoo.add(single_3);
+		ab_sets_incl_pmoo.add(pair_2);
+		ab_sets_incl_pmoo.add(pair_3);
+		ab_sets_incl_pmoo.add(triplet);
+		
+		return createParameters(Collections.singleton(Multiplexing.ARBITRARY), ab_sets, new HashSet<AlgDncBackend>())
+				.stream().map(Arguments::of);
+	}
+	
+	protected static Stream<Arguments> provideFifoExclPmooArguments() {
+		Set<Set<ArrivalBoundMethod>> ab_sets_excl_pmoo = new HashSet<Set<ArrivalBoundMethod>>();
+		ab_sets_excl_pmoo.add(single_1);
+		ab_sets_excl_pmoo.add(single_2);
+		ab_sets_excl_pmoo.add(pair_1);
+		
+		return createParameters(Collections.singleton(Multiplexing.FIFO), ab_sets_excl_pmoo, new HashSet<AlgDncBackend>())
+				.stream().map(Arguments::of);
 	}
 	
 	protected static Stream<Arguments> provideSinkTreeArguments() {
 		Set<Set<ArrivalBoundMethod>> ab_sets_sinktree = new HashSet<Set<ArrivalBoundMethod>>();
 		ab_sets_sinktree.add(sinktree);
 		
-		return createParameters(Collections.singleton(Multiplexing.ARBITRARY), ab_sets_sinktree).stream().map(Arguments::of);
+		return createParameters(Collections.singleton(Multiplexing.ARBITRARY), ab_sets_sinktree, new HashSet<AlgDncBackend>())
+				.stream().map(Arguments::of);
 	}
 
-	private static Set<DncTestConfig> createParameters(Set<Multiplexing> mux_disciplines, Set<Set<ArrivalBoundMethod>> ab_sets) {
+	private static Set<DncTestConfig> createParameters(Set<Multiplexing> mux_disciplines, 
+			Set<Set<ArrivalBoundMethod>> ab_sets, Set<AlgDncBackend> curves_excl) {
 		Set<DncTestConfig> test_configurations = new HashSet<DncTestConfig>();
 
 		Set<NumBackend> nums = new HashSet<NumBackend>();
