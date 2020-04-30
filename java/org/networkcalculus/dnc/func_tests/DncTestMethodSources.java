@@ -116,21 +116,21 @@ public class DncTestMethodSources {
 	}
 	
 	protected static Stream<Arguments> provideArbNonPmooArguments() {
-		Set<Set<ArrivalBoundMethod>> ab_sets_excl_pmoo = new HashSet<Set<ArrivalBoundMethod>>();
-		ab_sets_excl_pmoo.add(single_1);
-		ab_sets_excl_pmoo.add(single_2);
-		ab_sets_excl_pmoo.add(pair_1);
+		Set<Set<ArrivalBoundMethod>> ab_sets_non_pmoo = new HashSet<Set<ArrivalBoundMethod>>();
+		ab_sets_non_pmoo.add(single_1);
+		ab_sets_non_pmoo.add(single_2);
+		ab_sets_non_pmoo.add(pair_1);
 		
-		return createParameters(Collections.singleton(Multiplexing.FIFO), ab_sets_excl_pmoo, new HashSet<AlgDncBackend>())
+		return createParameters(Collections.singleton(Multiplexing.FIFO), ab_sets_non_pmoo, new HashSet<AlgDncBackend>())
 				.stream().map(Arguments::of);
 	}
 	
 	protected static Stream<Arguments> provideArbPmooArguments() {
-		Set<Set<ArrivalBoundMethod>> ab_sets_incl_pmoo = new HashSet<Set<ArrivalBoundMethod>>();
-		ab_sets_incl_pmoo.add(single_3);
-		ab_sets_incl_pmoo.add(pair_2);
-		ab_sets_incl_pmoo.add(pair_3);
-		ab_sets_incl_pmoo.add(triplet);
+		Set<Set<ArrivalBoundMethod>> ab_sets_pmoo = new HashSet<Set<ArrivalBoundMethod>>();
+		ab_sets_pmoo.add(single_3);
+		ab_sets_pmoo.add(pair_2);
+		ab_sets_pmoo.add(pair_3);
+		ab_sets_pmoo.add(triplet);
 		
 		return createParameters(Collections.singleton(Multiplexing.ARBITRARY), ab_sets, new HashSet<AlgDncBackend>())
 				.stream().map(Arguments::of);
@@ -164,30 +164,30 @@ public class DncTestMethodSources {
 		nums.add(NumBackend.RATIONAL_INTEGER);
 		nums.add(NumBackend.RATIONAL_BIGINTEGER);
 
-		Set<AlgDncBackend> curves = new HashSet<AlgDncBackend>();
-		curves.add(AlgDncBackend_DNC_ConPwAffine.DISCO_CONPWAFFINE);
-		curves.add(AlgDncBackend_DNC_Affine.DISCO_AFFINE);
+		Set<AlgDncBackend> alg_backends = new HashSet<AlgDncBackend>();
+		alg_backends.add(AlgDncBackend_DNC_ConPwAffine.DISCO_CONPWAFFINE);
+		alg_backends.add(AlgDncBackend_DNC_Affine.DISCO_AFFINE);
 
-		curves.add(AlgDncBackend_DNC_PwAffineC_Affine.DISCO_PWAFFINEC_AFFINEMP);
+		alg_backends.add(AlgDncBackend_DNC_PwAffineC_Affine.DISCO_PWAFFINEC_AFFINEMP);
 		
-		curves.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
-		curves.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
-		curves.add(AlgDncBackend_MPARTC_DISCO_ConPwAffine.MPARTC_PWAFFINEC_DISCO_CONPWAFFINEMP);
+		alg_backends.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
+		alg_backends.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
+		alg_backends.add(AlgDncBackend_MPARTC_DISCO_ConPwAffine.MPARTC_PWAFFINEC_DISCO_CONPWAFFINEMP);
 
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
-		for (AlgDncBackend curve : curves) {
+		for (AlgDncBackend alg : alg_backends) {
 			for (NumBackend num : nums) {
 				for (Set<ArrivalBoundMethod> ab : ab_sets) {
 					for (Multiplexing mux : mux_disciplines) {
-						test_configurations.add(new DncTestConfig(ab, false, false, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, false, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, true, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, false, true, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, false, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, false, mux, true, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, true, mux, false, num, curve));
-						test_configurations.add(new DncTestConfig(ab, true, true, mux, true, num, curve));
+						test_configurations.add(new DncTestConfig(ab, false, false, mux, false, num, alg));
+						test_configurations.add(new DncTestConfig(ab, false, false, mux, true, num, alg));
+						test_configurations.add(new DncTestConfig(ab, false, true, mux, false, num, alg));
+						test_configurations.add(new DncTestConfig(ab, false, true, mux, true, num, alg));
+						test_configurations.add(new DncTestConfig(ab, true, false, mux, false, num, alg));
+						test_configurations.add(new DncTestConfig(ab, true, false, mux, true, num, alg));
+						test_configurations.add(new DncTestConfig(ab, true, true, mux, false, num, alg));
+						test_configurations.add(new DncTestConfig(ab, true, true, mux, true, num, alg));
 					}
 				}
 			}
