@@ -158,11 +158,11 @@ public class DncTestMethodSources {
 			Set<Set<ArrivalBoundMethod>> ab_sets, Set<AlgDncBackend> curves_excl) {
 		Set<DncTestConfig> test_configurations = new HashSet<DncTestConfig>();
 
-		Set<NumBackend> nums = new HashSet<NumBackend>();
-		nums.add(NumBackend.REAL_DOUBLE_PRECISION);
-		nums.add(NumBackend.REAL_SINGLE_PRECISION);
-		nums.add(NumBackend.RATIONAL_INTEGER);
-		nums.add(NumBackend.RATIONAL_BIGINTEGER);
+		Set<NumBackend> num_backends = new HashSet<NumBackend>();
+		num_backends.add(NumBackend.REAL_DOUBLE_PRECISION);
+		num_backends.add(NumBackend.REAL_SINGLE_PRECISION);
+		num_backends.add(NumBackend.RATIONAL_INTEGER);
+		num_backends.add(NumBackend.RATIONAL_BIGINTEGER);
 
 		Set<AlgDncBackend> alg_backends = new HashSet<AlgDncBackend>();
 		alg_backends.add(AlgDncBackend_DNC_ConPwAffine.DISCO_CONPWAFFINE);
@@ -177,7 +177,7 @@ public class DncTestMethodSources {
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
 		for (AlgDncBackend alg : alg_backends) {
-			for (NumBackend num : nums) {
+			for (NumBackend num : num_backends) {
 				for (Set<ArrivalBoundMethod> ab : ab_sets) {
 					for (Multiplexing mux : mux_disciplines) {
 						test_configurations.add(new DncTestConfig(ab, false, false, mux, false, num, alg));
