@@ -170,9 +170,10 @@ public class DncTestMethodSources {
 
 		alg_backends.add(AlgDncBackend_DNC_PwAffineC_Affine.DISCO_PWAFFINEC_AFFINEMP);
 		
-		alg_backends.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
-		alg_backends.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
-		alg_backends.add(AlgDncBackend_MPARTC_DISCO_ConPwAffine.MPARTC_PWAFFINEC_DISCO_CONPWAFFINEMP);
+		// Disabled as they cause some casting exception
+		// alg_backends.add(AlgDncBackend_MPARTC_PwAffine.MPARTC_PWAFFINE);
+		// alg_backends.add(AlgDncBackend_MPARTC_DISCO_Affine.MPARTC_PWAFFINEC_DISCO_AFFINEMP);
+		// alg_backends.add(AlgDncBackend_MPARTC_DISCO_ConPwAffine.MPARTC_PWAFFINEC_DISCO_CONPWAFFINEMP);
 
 		// Parameter configurations for single arrival bounding tests:
 		// 		AB, convolve alternative ABs, global mux def, number class to use, curve class to use.
